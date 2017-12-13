@@ -1,0 +1,223 @@
+Dependencies for Project 'S3C2416', Target 'S3C2416': (DO NOT MODIFY !)
+F (..\Apps\main.c)(0x58B65D2C)(-c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I..\System -I..\eurocode -I D:\linxijunprogram\keilmdk\ARM\RV31\INC -I D:\linxijunprogram\keilmdk\ARM\CMSIS\Include -I D:\linxijunprogram\keilmdk\ARM\Inc\Samsung -o ".\Objects\main.o" --omf_browse ".\Objects\main.crf" --depend ".\Objects\main.d")
+I (..\System\s3c2416.h)(0x555070A6)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\string.h)(0x4D461916)
+I (..\System\uart.h)(0x5551CCDC)
+I (..\System\def.h)(0x58B66126)
+I (..\System\nand.h)(0x5524EC10)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\stdio.h)(0x4D461916)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\math.h)(0x4D011C2C)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x552F1F08)
+I (..\eurocode\yqadc.h)(0x55C01D4E)
+I (..\eurocode\yqfile.h)(0x58B6609C)
+I (..\eurocode\yqscreen.h)(0x55C0341C)
+I (..\eurocode\yqsqlite3.h)(0x58B660B9)
+I (..\eurocode\yqdrive.h)(0x58B660C5)
+F (..\Apps\Driver.c)(0x58B65CFA)(-c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I..\System -I..\eurocode -I D:\linxijunprogram\keilmdk\ARM\RV31\INC -I D:\linxijunprogram\keilmdk\ARM\CMSIS\Include -I D:\linxijunprogram\keilmdk\ARM\Inc\Samsung -o ".\Objects\driver.o" --omf_browse ".\Objects\driver.crf" --depend ".\Objects\driver.d")
+I (..\System\def.h)(0x58B66126)
+I (..\System\S3C2416.h)(0x555070A6)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\string.h)(0x4D461916)
+I (..\System\uart.h)(0x5551CCDC)
+I (..\System\nand.h)(0x5524EC10)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\stdio.h)(0x4D461916)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\math.h)(0x4D011C2C)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x552F1F08)
+I (..\eurocode\yqadc.h)(0x55C01D4E)
+I (..\eurocode\yqfile.h)(0x58B6609C)
+I (..\eurocode\yqscreen.h)(0x55C0341C)
+I (..\eurocode\yqsqlite3.h)(0x58B660B9)
+I (..\eurocode\yqdrive.h)(0x58B660C5)
+F (..\System\Exception.c)(0x54B8D796)(-c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I..\System -I..\eurocode -I D:\linxijunprogram\keilmdk\ARM\RV31\INC -I D:\linxijunprogram\keilmdk\ARM\CMSIS\Include -I D:\linxijunprogram\keilmdk\ARM\Inc\Samsung -o ".\Objects\exception.o" --omf_browse ".\Objects\exception.crf" --depend ".\Objects\exception.d")
+I (..\System\s3c2416.h)(0x555070A6)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\string.h)(0x4D461916)
+I (..\System\uart.h)(0x5551CCDC)
+I (..\System\def.h)(0x58B66126)
+I (..\System\nand.h)(0x5524EC10)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\stdio.h)(0x4D461916)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\math.h)(0x4D011C2C)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x552F1F08)
+I (..\eurocode\yqadc.h)(0x55C01D4E)
+I (..\eurocode\yqfile.h)(0x58B6609C)
+I (..\eurocode\yqscreen.h)(0x55C0341C)
+I (..\eurocode\yqsqlite3.h)(0x58B660B9)
+I (..\eurocode\yqdrive.h)(0x58B660C5)
+I (..\System\Exception.h)(0x54B8D796)
+F (..\System\MMU.c)(0x54B8D796)(-c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I..\System -I..\eurocode -I D:\linxijunprogram\keilmdk\ARM\RV31\INC -I D:\linxijunprogram\keilmdk\ARM\CMSIS\Include -I D:\linxijunprogram\keilmdk\ARM\Inc\Samsung -o ".\Objects\mmu.o" --omf_browse ".\Objects\mmu.crf" --depend ".\Objects\mmu.d")
+I (..\System\MMU.h)(0x54B8D796)
+F (..\System\NAND.c)(0x5524EC26)(-c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I..\System -I..\eurocode -I D:\linxijunprogram\keilmdk\ARM\RV31\INC -I D:\linxijunprogram\keilmdk\ARM\CMSIS\Include -I D:\linxijunprogram\keilmdk\ARM\Inc\Samsung -o ".\Objects\nand.o" --omf_browse ".\Objects\nand.crf" --depend ".\Objects\nand.d")
+I (..\System\NAND.h)(0x5524EC10)
+I (..\System\s3c2416.h)(0x555070A6)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\string.h)(0x4D461916)
+I (..\System\uart.h)(0x5551CCDC)
+I (..\System\def.h)(0x58B66126)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\stdio.h)(0x4D461916)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\math.h)(0x4D011C2C)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x552F1F08)
+I (..\eurocode\yqadc.h)(0x55C01D4E)
+I (..\eurocode\yqfile.h)(0x58B6609C)
+I (..\eurocode\yqscreen.h)(0x55C0341C)
+I (..\eurocode\yqsqlite3.h)(0x58B660B9)
+I (..\eurocode\yqdrive.h)(0x58B660C5)
+F (..\System\LowLevelInit.s)(0x54B8D796)(--cpu ARM926EJ-S -g --apcs=interwork -I D:\linxijunprogram\keilmdk\ARM\RV31\INC -I D:\linxijunprogram\keilmdk\ARM\CMSIS\Include -I D:\linxijunprogram\keilmdk\ARM\Inc\Samsung --list ".\LowLevelInit.lst" --xref -o ".\Objects\LowLevelInit.o" --depend ".\Objects\LowLevelInit.d")
+F (..\System\s3c2416.s)(0x54B8D796)(--cpu ARM926EJ-S -g --apcs=interwork -I D:\linxijunprogram\keilmdk\ARM\RV31\INC -I D:\linxijunprogram\keilmdk\ARM\CMSIS\Include -I D:\linxijunprogram\keilmdk\ARM\Inc\Samsung --list ".\s3c2416.lst" --xref -o ".\Objects\s3c2416.o" --depend ".\Objects\s3c2416.d")
+F (..\System\UART2416.C)(0x5551CCDC)(-c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I..\System -I..\eurocode -I D:\linxijunprogram\keilmdk\ARM\RV31\INC -I D:\linxijunprogram\keilmdk\ARM\CMSIS\Include -I D:\linxijunprogram\keilmdk\ARM\Inc\Samsung -o ".\Objects\uart2416.o" --omf_browse ".\Objects\uart2416.crf" --depend ".\Objects\uart2416.d")
+I (..\System\S3C2416.h)(0x555070A6)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\string.h)(0x4D461916)
+I (..\System\uart.h)(0x5551CCDC)
+I (..\System\def.h)(0x58B66126)
+I (..\System\nand.h)(0x5524EC10)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\stdio.h)(0x4D461916)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\math.h)(0x4D011C2C)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x552F1F08)
+I (..\eurocode\yqadc.h)(0x55C01D4E)
+I (..\eurocode\yqfile.h)(0x58B6609C)
+I (..\eurocode\yqscreen.h)(0x55C0341C)
+I (..\eurocode\yqsqlite3.h)(0x58B660B9)
+I (..\eurocode\yqdrive.h)(0x58B660C5)
+I (D:\linxijunprogram\keilmdk\ARM\ARMCC\bin\..\include\stdarg.h)(0x50F9614E)
+I (D:\linxijunprogram\keilmdk\ARM\ARMCC\bin\..\include\string.h)(0x50F96150)
+I (D:\linxijunprogram\keilmdk\ARM\ARMCC\bin\..\include\stdlib.h)(0x50F96150)
+I (D:\linxijunprogram\keilmdk\ARM\ARMCC\bin\..\include\stdio.h)(0x50F96150)
+I (D:\linxijunprogram\keilmdk\ARM\ARMCC\bin\..\include\ctype.h)(0x50F96150)
+I (..\System\exception.h)(0x54B8D796)
+F (..\System\Timer_IRQ.c)(0x58B65D2E)(-c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I..\System -I..\eurocode -I D:\linxijunprogram\keilmdk\ARM\RV31\INC -I D:\linxijunprogram\keilmdk\ARM\CMSIS\Include -I D:\linxijunprogram\keilmdk\ARM\Inc\Samsung -o ".\Objects\timer_irq.o" --omf_browse ".\Objects\timer_irq.crf" --depend ".\Objects\timer_irq.d")
+I (..\System\def.h)(0x58B66126)
+I (..\System\S3C2416.h)(0x555070A6)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\string.h)(0x4D461916)
+I (..\System\uart.h)(0x5551CCDC)
+I (..\System\nand.h)(0x5524EC10)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\stdio.h)(0x4D461916)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\math.h)(0x4D011C2C)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x552F1F08)
+I (..\eurocode\yqadc.h)(0x55C01D4E)
+I (..\eurocode\yqfile.h)(0x58B6609C)
+I (..\eurocode\yqscreen.h)(0x55C0341C)
+I (..\eurocode\yqsqlite3.h)(0x58B660B9)
+I (..\eurocode\yqdrive.h)(0x58B660C5)
+I (..\System\Exception.h)(0x54B8D796)
+F (..\System\WDC.c)(0x5523858A)(-c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I..\System -I..\eurocode -I D:\linxijunprogram\keilmdk\ARM\RV31\INC -I D:\linxijunprogram\keilmdk\ARM\CMSIS\Include -I D:\linxijunprogram\keilmdk\ARM\Inc\Samsung -o ".\Objects\wdc.o" --omf_browse ".\Objects\wdc.crf" --depend ".\Objects\wdc.d")
+I (..\System\S3C2416.h)(0x555070A6)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\string.h)(0x4D461916)
+I (..\System\uart.h)(0x5551CCDC)
+I (..\System\def.h)(0x58B66126)
+I (..\System\nand.h)(0x5524EC10)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\stdio.h)(0x4D461916)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\math.h)(0x4D011C2C)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x552F1F08)
+I (..\eurocode\yqadc.h)(0x55C01D4E)
+I (..\eurocode\yqfile.h)(0x58B6609C)
+I (..\eurocode\yqscreen.h)(0x55C0341C)
+I (..\eurocode\yqsqlite3.h)(0x58B660B9)
+I (..\eurocode\yqdrive.h)(0x58B660C5)
+F (..\System\adc.c)(0x58B65D2F)(-c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I..\System -I..\eurocode -I D:\linxijunprogram\keilmdk\ARM\RV31\INC -I D:\linxijunprogram\keilmdk\ARM\CMSIS\Include -I D:\linxijunprogram\keilmdk\ARM\Inc\Samsung -o ".\Objects\adc.o" --omf_browse ".\Objects\adc.crf" --depend ".\Objects\adc.d")
+I (..\System\S3C2416.h)(0x555070A6)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\string.h)(0x4D461916)
+I (..\System\uart.h)(0x5551CCDC)
+I (..\System\def.h)(0x58B66126)
+I (..\System\nand.h)(0x5524EC10)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\stdio.h)(0x4D461916)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\math.h)(0x4D011C2C)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x552F1F08)
+I (..\eurocode\yqadc.h)(0x55C01D4E)
+I (..\eurocode\yqfile.h)(0x58B6609C)
+I (..\eurocode\yqscreen.h)(0x55C0341C)
+I (..\eurocode\yqsqlite3.h)(0x58B660B9)
+I (..\eurocode\yqdrive.h)(0x58B660C5)
+F (..\eurocode\yqadc.c)(0x561DED75)(-c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I..\System -I..\eurocode -I D:\linxijunprogram\keilmdk\ARM\RV31\INC -I D:\linxijunprogram\keilmdk\ARM\CMSIS\Include -I D:\linxijunprogram\keilmdk\ARM\Inc\Samsung -o ".\Objects\yqadc.o" --omf_browse ".\Objects\yqadc.crf" --depend ".\Objects\yqadc.d")
+I (..\System\s3c2416.h)(0x555070A6)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\string.h)(0x4D461916)
+I (..\System\uart.h)(0x5551CCDC)
+I (..\System\def.h)(0x58B66126)
+I (..\System\nand.h)(0x5524EC10)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\stdio.h)(0x4D461916)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\math.h)(0x4D011C2C)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x552F1F08)
+I (..\eurocode\yqadc.h)(0x55C01D4E)
+I (..\eurocode\yqfile.h)(0x58B6609C)
+I (..\eurocode\yqscreen.h)(0x55C0341C)
+I (..\eurocode\yqsqlite3.h)(0x58B660B9)
+I (..\eurocode\yqdrive.h)(0x58B660C5)
+F (..\eurocode\yqcoin.c)(0x5704832C)(-c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I..\System -I..\eurocode -I D:\linxijunprogram\keilmdk\ARM\RV31\INC -I D:\linxijunprogram\keilmdk\ARM\CMSIS\Include -I D:\linxijunprogram\keilmdk\ARM\Inc\Samsung -o ".\Objects\yqcoin.o" --omf_browse ".\Objects\yqcoin.crf" --depend ".\Objects\yqcoin.d")
+I (..\System\s3c2416.h)(0x555070A6)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\string.h)(0x4D461916)
+I (..\System\uart.h)(0x5551CCDC)
+I (..\System\def.h)(0x58B66126)
+I (..\System\nand.h)(0x5524EC10)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\stdio.h)(0x4D461916)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\math.h)(0x4D011C2C)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x552F1F08)
+I (..\eurocode\yqadc.h)(0x55C01D4E)
+I (..\eurocode\yqfile.h)(0x58B6609C)
+I (..\eurocode\yqscreen.h)(0x55C0341C)
+I (..\eurocode\yqsqlite3.h)(0x58B660B9)
+I (..\eurocode\yqdrive.h)(0x58B660C5)
+F (..\eurocode\yqfile.c)(0x58B65EBA)(-c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I..\System -I..\eurocode -I D:\linxijunprogram\keilmdk\ARM\RV31\INC -I D:\linxijunprogram\keilmdk\ARM\CMSIS\Include -I D:\linxijunprogram\keilmdk\ARM\Inc\Samsung -o ".\Objects\yqfile.o" --omf_browse ".\Objects\yqfile.crf" --depend ".\Objects\yqfile.d")
+I (..\System\s3c2416.h)(0x555070A6)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\string.h)(0x4D461916)
+I (..\System\uart.h)(0x5551CCDC)
+I (..\System\def.h)(0x58B66126)
+I (..\System\nand.h)(0x5524EC10)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\stdio.h)(0x4D461916)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\math.h)(0x4D011C2C)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x552F1F08)
+I (..\eurocode\yqadc.h)(0x55C01D4E)
+I (..\eurocode\yqfile.h)(0x58B6609C)
+I (..\eurocode\yqscreen.h)(0x55C0341C)
+I (..\eurocode\yqsqlite3.h)(0x58B660B9)
+I (..\eurocode\yqdrive.h)(0x58B660C5)
+F (..\eurocode\yqscreen.c)(0x57036C5D)(-c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I..\System -I..\eurocode -I D:\linxijunprogram\keilmdk\ARM\RV31\INC -I D:\linxijunprogram\keilmdk\ARM\CMSIS\Include -I D:\linxijunprogram\keilmdk\ARM\Inc\Samsung -o ".\Objects\yqscreen.o" --omf_browse ".\Objects\yqscreen.crf" --depend ".\Objects\yqscreen.d")
+I (..\System\s3c2416.h)(0x555070A6)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\string.h)(0x4D461916)
+I (..\System\uart.h)(0x5551CCDC)
+I (..\System\def.h)(0x58B66126)
+I (..\System\nand.h)(0x5524EC10)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\stdio.h)(0x4D461916)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\math.h)(0x4D011C2C)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x552F1F08)
+I (..\eurocode\yqadc.h)(0x55C01D4E)
+I (..\eurocode\yqfile.h)(0x58B6609C)
+I (..\eurocode\yqscreen.h)(0x55C0341C)
+I (..\eurocode\yqsqlite3.h)(0x58B660B9)
+I (..\eurocode\yqdrive.h)(0x58B660C5)
+F (..\eurocode\yqsqlite3.c)(0x58B65F83)(-c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I..\System -I..\eurocode -I D:\linxijunprogram\keilmdk\ARM\RV31\INC -I D:\linxijunprogram\keilmdk\ARM\CMSIS\Include -I D:\linxijunprogram\keilmdk\ARM\Inc\Samsung -o ".\Objects\yqsqlite3.o" --omf_browse ".\Objects\yqsqlite3.crf" --depend ".\Objects\yqsqlite3.d")
+I (..\System\s3c2416.h)(0x555070A6)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\string.h)(0x4D461916)
+I (..\System\uart.h)(0x5551CCDC)
+I (..\System\def.h)(0x58B66126)
+I (..\System\nand.h)(0x5524EC10)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\stdio.h)(0x4D461916)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\math.h)(0x4D011C2C)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x552F1F08)
+I (..\eurocode\yqadc.h)(0x55C01D4E)
+I (..\eurocode\yqfile.h)(0x58B6609C)
+I (..\eurocode\yqscreen.h)(0x55C0341C)
+I (..\eurocode\yqsqlite3.h)(0x58B660B9)
+I (..\eurocode\yqdrive.h)(0x58B660C5)
+F (..\eurocode\yqdrive.c)(0x564940BC)(-c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I..\System -I..\eurocode -I D:\linxijunprogram\keilmdk\ARM\RV31\INC -I D:\linxijunprogram\keilmdk\ARM\CMSIS\Include -I D:\linxijunprogram\keilmdk\ARM\Inc\Samsung -o ".\Objects\yqdrive.o" --omf_browse ".\Objects\yqdrive.crf" --depend ".\Objects\yqdrive.d")
+I (..\System\s3c2416.h)(0x555070A6)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\string.h)(0x4D461916)
+I (..\System\uart.h)(0x5551CCDC)
+I (..\System\def.h)(0x58B66126)
+I (..\System\nand.h)(0x5524EC10)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\stdio.h)(0x4D461916)
+I (D:\linxijunprogram\keilmdk\ARM\RV31\INC\math.h)(0x4D011C2C)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x552F1F08)
+I (..\eurocode\yqadc.h)(0x55C01D4E)
+I (..\eurocode\yqfile.h)(0x58B6609C)
+I (..\eurocode\yqscreen.h)(0x55C0341C)
+I (..\eurocode\yqsqlite3.h)(0x58B660B9)
+I (..\eurocode\yqdrive.h)(0x58B660C5)

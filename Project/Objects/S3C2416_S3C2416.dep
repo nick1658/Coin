@@ -1,0 +1,528 @@
+Dependencies for Project 'S3C2416', Target 'S3C2416': (DO NOT MODIFY !)
+F (..\Apps\main.c)(0x5A211A4B)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (..\System\s3c2416.h)(0x5A20F9C5)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F606B8)
+I (..\System\exception.h)(0x59E6ADF1)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x57F606B6)
+I (..\System\uart.h)(0x595F07E0)
+I (..\System\def.h)(0x5A0D3635)
+I (..\System\nand.h)(0x5A1F78B4)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x57F606B6)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x5A1917FB)
+I (..\eurocode\yqsqlite3.h)(0x5A210625)
+I (..\eurocode\AD_filter.h)(0x59084C60)
+I (..\eurocode\yqadc.h)(0x5A25063E)
+I (..\eurocode\yqfile.h)(0x5A15169B)
+I (..\eurocode\yqscreen.h)(0x5A1FC7C2)
+I (..\eurocode\yqdrive.h)(0x5A1621D4)
+I (..\eurocode\my_cmd.h)(0x5A20C96A)
+I (..\System\Hsmmc.h)(0x59E80660)
+I (..\Fatfs\ff.h)(0x52D56672)
+I (..\Fatfs\integer.h)(0x594F588B)
+I (..\Fatfs\ffconf.h)(0x59FC07D9)
+I (..\Fatfs\diskio.h)(0x52D56672)
+I (..\Apps\RTC.h)(0x59535729)
+I (..\eurocode\log.h)(0x59561436)
+F (..\Apps\Driver.c)(0x5A000068)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\driver.o --omf_browse .\objects\driver.crf --depend .\objects\driver.d)
+I (..\System\def.h)(0x5A0D3635)
+I (..\System\S3C2416.h)(0x5A20F9C5)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F606B8)
+I (..\System\exception.h)(0x59E6ADF1)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x57F606B6)
+I (..\System\uart.h)(0x595F07E0)
+I (..\System\nand.h)(0x5A1F78B4)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x57F606B6)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x5A1917FB)
+I (..\eurocode\yqsqlite3.h)(0x5A210625)
+I (..\eurocode\AD_filter.h)(0x59084C60)
+I (..\eurocode\yqadc.h)(0x5A25063E)
+I (..\eurocode\yqfile.h)(0x5A15169B)
+I (..\eurocode\yqscreen.h)(0x5A1FC7C2)
+I (..\eurocode\yqdrive.h)(0x5A1621D4)
+I (..\eurocode\my_cmd.h)(0x5A20C96A)
+I (..\System\Hsmmc.h)(0x59E80660)
+I (..\Fatfs\ff.h)(0x52D56672)
+I (..\Fatfs\integer.h)(0x594F588B)
+I (..\Fatfs\ffconf.h)(0x59FC07D9)
+I (..\Fatfs\diskio.h)(0x52D56672)
+I (..\Apps\RTC.h)(0x59535729)
+I (..\eurocode\log.h)(0x59561436)
+F (..\Apps\RTC.c)(0x5954A154)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\rtc.o --omf_browse .\objects\rtc.crf --depend .\objects\rtc.d)
+I (..\System\s3c2416.h)(0x5A20F9C5)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F606B8)
+I (..\System\exception.h)(0x59E6ADF1)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x57F606B6)
+I (..\System\uart.h)(0x595F07E0)
+I (..\System\def.h)(0x5A0D3635)
+I (..\System\nand.h)(0x5A1F78B4)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x57F606B6)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x5A1917FB)
+I (..\eurocode\yqsqlite3.h)(0x5A210625)
+I (..\eurocode\AD_filter.h)(0x59084C60)
+I (..\eurocode\yqadc.h)(0x5A25063E)
+I (..\eurocode\yqfile.h)(0x5A15169B)
+I (..\eurocode\yqscreen.h)(0x5A1FC7C2)
+I (..\eurocode\yqdrive.h)(0x5A1621D4)
+I (..\eurocode\my_cmd.h)(0x5A20C96A)
+I (..\System\Hsmmc.h)(0x59E80660)
+I (..\Fatfs\ff.h)(0x52D56672)
+I (..\Fatfs\integer.h)(0x594F588B)
+I (..\Fatfs\ffconf.h)(0x59FC07D9)
+I (..\Fatfs\diskio.h)(0x52D56672)
+I (..\Apps\RTC.h)(0x59535729)
+I (..\eurocode\log.h)(0x59561436)
+F (..\System\Exception.c)(0x59E6ADE3)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\exception.o --omf_browse .\objects\exception.crf --depend .\objects\exception.d)
+I (..\System\s3c2416.h)(0x5A20F9C5)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F606B8)
+I (..\System\exception.h)(0x59E6ADF1)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x57F606B6)
+I (..\System\uart.h)(0x595F07E0)
+I (..\System\def.h)(0x5A0D3635)
+I (..\System\nand.h)(0x5A1F78B4)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x57F606B6)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x5A1917FB)
+I (..\eurocode\yqsqlite3.h)(0x5A210625)
+I (..\eurocode\AD_filter.h)(0x59084C60)
+I (..\eurocode\yqadc.h)(0x5A25063E)
+I (..\eurocode\yqfile.h)(0x5A15169B)
+I (..\eurocode\yqscreen.h)(0x5A1FC7C2)
+I (..\eurocode\yqdrive.h)(0x5A1621D4)
+I (..\eurocode\my_cmd.h)(0x5A20C96A)
+I (..\System\Hsmmc.h)(0x59E80660)
+I (..\Fatfs\ff.h)(0x52D56672)
+I (..\Fatfs\integer.h)(0x594F588B)
+I (..\Fatfs\ffconf.h)(0x59FC07D9)
+I (..\Fatfs\diskio.h)(0x52D56672)
+I (..\Apps\RTC.h)(0x59535729)
+I (..\eurocode\log.h)(0x59561436)
+F (..\System\MMU.c)(0x5950E404)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\mmu.o --omf_browse .\objects\mmu.crf --depend .\objects\mmu.d)
+I (..\System\MMU.h)(0x54B8D796)
+F (..\System\NAND.c)(0x5A1F7897)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\nand.o --omf_browse .\objects\nand.crf --depend .\objects\nand.d)
+I (..\System\NAND.h)(0x5A1F78B4)
+I (..\System\s3c2416.h)(0x5A20F9C5)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F606B8)
+I (..\System\exception.h)(0x59E6ADF1)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x57F606B6)
+I (..\System\uart.h)(0x595F07E0)
+I (..\System\def.h)(0x5A0D3635)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x57F606B6)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x5A1917FB)
+I (..\eurocode\yqsqlite3.h)(0x5A210625)
+I (..\eurocode\AD_filter.h)(0x59084C60)
+I (..\eurocode\yqadc.h)(0x5A25063E)
+I (..\eurocode\yqfile.h)(0x5A15169B)
+I (..\eurocode\yqscreen.h)(0x5A1FC7C2)
+I (..\eurocode\yqdrive.h)(0x5A1621D4)
+I (..\eurocode\my_cmd.h)(0x5A20C96A)
+I (..\System\Hsmmc.h)(0x59E80660)
+I (..\Fatfs\ff.h)(0x52D56672)
+I (..\Fatfs\integer.h)(0x594F588B)
+I (..\Fatfs\ffconf.h)(0x59FC07D9)
+I (..\Fatfs\diskio.h)(0x52D56672)
+I (..\Apps\RTC.h)(0x59535729)
+I (..\eurocode\log.h)(0x59561436)
+F (..\System\LowLevelInit.s)(0x590298B2)(--cpu ARM926EJ-S -g --apcs=interwork -IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung--pd "__UVISION_VERSION SETA 523"--list .\lowlevelinit.lst --xref -o .\objects\lowlevelinit.o --depend .\objects\lowlevelinit.d)
+F (..\System\s3c2416.s)(0x5A1F7D97)(--cpu ARM926EJ-S -g --apcs=interwork -IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung--pd "__UVISION_VERSION SETA 523"--list .\s3c2416.lst --xref -o .\objects\s3c2416.o --depend .\objects\s3c2416.d)
+F (..\System\UART2416.C)(0x598D5EA6)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\uart2416.o --omf_browse .\objects\uart2416.crf --depend .\objects\uart2416.d)
+I (..\System\S3C2416.h)(0x5A20F9C5)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F606B8)
+I (..\System\exception.h)(0x59E6ADF1)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x57F606B6)
+I (..\System\uart.h)(0x595F07E0)
+I (..\System\def.h)(0x5A0D3635)
+I (..\System\nand.h)(0x5A1F78B4)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x57F606B6)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x5A1917FB)
+I (..\eurocode\yqsqlite3.h)(0x5A210625)
+I (..\eurocode\AD_filter.h)(0x59084C60)
+I (..\eurocode\yqadc.h)(0x5A25063E)
+I (..\eurocode\yqfile.h)(0x5A15169B)
+I (..\eurocode\yqscreen.h)(0x5A1FC7C2)
+I (..\eurocode\yqdrive.h)(0x5A1621D4)
+I (..\eurocode\my_cmd.h)(0x5A20C96A)
+I (..\System\Hsmmc.h)(0x59E80660)
+I (..\Fatfs\ff.h)(0x52D56672)
+I (..\Fatfs\integer.h)(0x594F588B)
+I (..\Fatfs\ffconf.h)(0x59FC07D9)
+I (..\Fatfs\diskio.h)(0x52D56672)
+I (..\Apps\RTC.h)(0x59535729)
+I (..\eurocode\log.h)(0x59561436)
+F (..\System\Timer_IRQ.c)(0x5A162517)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\timer_irq.o --omf_browse .\objects\timer_irq.crf --depend .\objects\timer_irq.d)
+I (..\System\def.h)(0x5A0D3635)
+I (..\System\S3C2416.h)(0x5A20F9C5)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F606B8)
+I (..\System\exception.h)(0x59E6ADF1)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x57F606B6)
+I (..\System\uart.h)(0x595F07E0)
+I (..\System\nand.h)(0x5A1F78B4)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x57F606B6)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x5A1917FB)
+I (..\eurocode\yqsqlite3.h)(0x5A210625)
+I (..\eurocode\AD_filter.h)(0x59084C60)
+I (..\eurocode\yqadc.h)(0x5A25063E)
+I (..\eurocode\yqfile.h)(0x5A15169B)
+I (..\eurocode\yqscreen.h)(0x5A1FC7C2)
+I (..\eurocode\yqdrive.h)(0x5A1621D4)
+I (..\eurocode\my_cmd.h)(0x5A20C96A)
+I (..\System\Hsmmc.h)(0x59E80660)
+I (..\Fatfs\ff.h)(0x52D56672)
+I (..\Fatfs\integer.h)(0x594F588B)
+I (..\Fatfs\ffconf.h)(0x59FC07D9)
+I (..\Fatfs\diskio.h)(0x52D56672)
+I (..\Apps\RTC.h)(0x59535729)
+I (..\eurocode\log.h)(0x59561436)
+F (..\System\WDC.c)(0x5A14D10E)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\wdc.o --omf_browse .\objects\wdc.crf --depend .\objects\wdc.d)
+I (..\System\S3C2416.h)(0x5A20F9C5)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F606B8)
+I (..\System\exception.h)(0x59E6ADF1)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x57F606B6)
+I (..\System\uart.h)(0x595F07E0)
+I (..\System\def.h)(0x5A0D3635)
+I (..\System\nand.h)(0x5A1F78B4)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x57F606B6)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x5A1917FB)
+I (..\eurocode\yqsqlite3.h)(0x5A210625)
+I (..\eurocode\AD_filter.h)(0x59084C60)
+I (..\eurocode\yqadc.h)(0x5A25063E)
+I (..\eurocode\yqfile.h)(0x5A15169B)
+I (..\eurocode\yqscreen.h)(0x5A1FC7C2)
+I (..\eurocode\yqdrive.h)(0x5A1621D4)
+I (..\eurocode\my_cmd.h)(0x5A20C96A)
+I (..\System\Hsmmc.h)(0x59E80660)
+I (..\Fatfs\ff.h)(0x52D56672)
+I (..\Fatfs\integer.h)(0x594F588B)
+I (..\Fatfs\ffconf.h)(0x59FC07D9)
+I (..\Fatfs\diskio.h)(0x52D56672)
+I (..\Apps\RTC.h)(0x59535729)
+I (..\eurocode\log.h)(0x59561436)
+F (..\System\adc.c)(0x5A19138A)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\adc.o --omf_browse .\objects\adc.crf --depend .\objects\adc.d)
+I (..\System\S3C2416.h)(0x5A20F9C5)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F606B8)
+I (..\System\exception.h)(0x59E6ADF1)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x57F606B6)
+I (..\System\uart.h)(0x595F07E0)
+I (..\System\def.h)(0x5A0D3635)
+I (..\System\nand.h)(0x5A1F78B4)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x57F606B6)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x5A1917FB)
+I (..\eurocode\yqsqlite3.h)(0x5A210625)
+I (..\eurocode\AD_filter.h)(0x59084C60)
+I (..\eurocode\yqadc.h)(0x5A25063E)
+I (..\eurocode\yqfile.h)(0x5A15169B)
+I (..\eurocode\yqscreen.h)(0x5A1FC7C2)
+I (..\eurocode\yqdrive.h)(0x5A1621D4)
+I (..\eurocode\my_cmd.h)(0x5A20C96A)
+I (..\System\Hsmmc.h)(0x59E80660)
+I (..\Fatfs\ff.h)(0x52D56672)
+I (..\Fatfs\integer.h)(0x594F588B)
+I (..\Fatfs\ffconf.h)(0x59FC07D9)
+I (..\Fatfs\diskio.h)(0x52D56672)
+I (..\Apps\RTC.h)(0x59535729)
+I (..\eurocode\log.h)(0x59561436)
+F (..\System\Hsmmc.c)(0x5A14D10E)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\hsmmc.o --omf_browse .\objects\hsmmc.crf --depend .\objects\hsmmc.d)
+I (..\System\s3c2416.h)(0x5A20F9C5)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F606B8)
+I (..\System\exception.h)(0x59E6ADF1)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x57F606B6)
+I (..\System\uart.h)(0x595F07E0)
+I (..\System\def.h)(0x5A0D3635)
+I (..\System\nand.h)(0x5A1F78B4)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x57F606B6)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x5A1917FB)
+I (..\eurocode\yqsqlite3.h)(0x5A210625)
+I (..\eurocode\AD_filter.h)(0x59084C60)
+I (..\eurocode\yqadc.h)(0x5A25063E)
+I (..\eurocode\yqfile.h)(0x5A15169B)
+I (..\eurocode\yqscreen.h)(0x5A1FC7C2)
+I (..\eurocode\yqdrive.h)(0x5A1621D4)
+I (..\eurocode\my_cmd.h)(0x5A20C96A)
+I (..\System\Hsmmc.h)(0x59E80660)
+I (..\Fatfs\ff.h)(0x52D56672)
+I (..\Fatfs\integer.h)(0x594F588B)
+I (..\Fatfs\ffconf.h)(0x59FC07D9)
+I (..\Fatfs\diskio.h)(0x52D56672)
+I (..\Apps\RTC.h)(0x59535729)
+I (..\eurocode\log.h)(0x59561436)
+F (..\eurocode\yqadc.c)(0x5A21208D)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\yqadc.o --omf_browse .\objects\yqadc.crf --depend .\objects\yqadc.d)
+I (..\System\s3c2416.h)(0x5A20F9C5)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F606B8)
+I (..\System\exception.h)(0x59E6ADF1)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x57F606B6)
+I (..\System\uart.h)(0x595F07E0)
+I (..\System\def.h)(0x5A0D3635)
+I (..\System\nand.h)(0x5A1F78B4)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x57F606B6)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x5A1917FB)
+I (..\eurocode\yqsqlite3.h)(0x5A210625)
+I (..\eurocode\AD_filter.h)(0x59084C60)
+I (..\eurocode\yqadc.h)(0x5A25063E)
+I (..\eurocode\yqfile.h)(0x5A15169B)
+I (..\eurocode\yqscreen.h)(0x5A1FC7C2)
+I (..\eurocode\yqdrive.h)(0x5A1621D4)
+I (..\eurocode\my_cmd.h)(0x5A20C96A)
+I (..\System\Hsmmc.h)(0x59E80660)
+I (..\Fatfs\ff.h)(0x52D56672)
+I (..\Fatfs\integer.h)(0x594F588B)
+I (..\Fatfs\ffconf.h)(0x59FC07D9)
+I (..\Fatfs\diskio.h)(0x52D56672)
+I (..\Apps\RTC.h)(0x59535729)
+I (..\eurocode\log.h)(0x59561436)
+F (..\eurocode\yqcoin.c)(0x5A20FA2A)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\yqcoin.o --omf_browse .\objects\yqcoin.crf --depend .\objects\yqcoin.d)
+I (..\System\s3c2416.h)(0x5A20F9C5)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F606B8)
+I (..\System\exception.h)(0x59E6ADF1)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x57F606B6)
+I (..\System\uart.h)(0x595F07E0)
+I (..\System\def.h)(0x5A0D3635)
+I (..\System\nand.h)(0x5A1F78B4)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x57F606B6)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x5A1917FB)
+I (..\eurocode\yqsqlite3.h)(0x5A210625)
+I (..\eurocode\AD_filter.h)(0x59084C60)
+I (..\eurocode\yqadc.h)(0x5A25063E)
+I (..\eurocode\yqfile.h)(0x5A15169B)
+I (..\eurocode\yqscreen.h)(0x5A1FC7C2)
+I (..\eurocode\yqdrive.h)(0x5A1621D4)
+I (..\eurocode\my_cmd.h)(0x5A20C96A)
+I (..\System\Hsmmc.h)(0x59E80660)
+I (..\Fatfs\ff.h)(0x52D56672)
+I (..\Fatfs\integer.h)(0x594F588B)
+I (..\Fatfs\ffconf.h)(0x59FC07D9)
+I (..\Fatfs\diskio.h)(0x52D56672)
+I (..\Apps\RTC.h)(0x59535729)
+I (..\eurocode\log.h)(0x59561436)
+F (..\eurocode\yqfile.c)(0x5A2112A7)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\yqfile.o --omf_browse .\objects\yqfile.crf --depend .\objects\yqfile.d)
+I (..\System\s3c2416.h)(0x5A20F9C5)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F606B8)
+I (..\System\exception.h)(0x59E6ADF1)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x57F606B6)
+I (..\System\uart.h)(0x595F07E0)
+I (..\System\def.h)(0x5A0D3635)
+I (..\System\nand.h)(0x5A1F78B4)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x57F606B6)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x5A1917FB)
+I (..\eurocode\yqsqlite3.h)(0x5A210625)
+I (..\eurocode\AD_filter.h)(0x59084C60)
+I (..\eurocode\yqadc.h)(0x5A25063E)
+I (..\eurocode\yqfile.h)(0x5A15169B)
+I (..\eurocode\yqscreen.h)(0x5A1FC7C2)
+I (..\eurocode\yqdrive.h)(0x5A1621D4)
+I (..\eurocode\my_cmd.h)(0x5A20C96A)
+I (..\System\Hsmmc.h)(0x59E80660)
+I (..\Fatfs\ff.h)(0x52D56672)
+I (..\Fatfs\integer.h)(0x594F588B)
+I (..\Fatfs\ffconf.h)(0x59FC07D9)
+I (..\Fatfs\diskio.h)(0x52D56672)
+I (..\Apps\RTC.h)(0x59535729)
+I (..\eurocode\log.h)(0x59561436)
+F (..\eurocode\yqscreen.c)(0x5A212193)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\yqscreen.o --omf_browse .\objects\yqscreen.crf --depend .\objects\yqscreen.d)
+I (..\System\s3c2416.h)(0x5A20F9C5)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F606B8)
+I (..\System\exception.h)(0x59E6ADF1)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x57F606B6)
+I (..\System\uart.h)(0x595F07E0)
+I (..\System\def.h)(0x5A0D3635)
+I (..\System\nand.h)(0x5A1F78B4)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x57F606B6)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x5A1917FB)
+I (..\eurocode\yqsqlite3.h)(0x5A210625)
+I (..\eurocode\AD_filter.h)(0x59084C60)
+I (..\eurocode\yqadc.h)(0x5A25063E)
+I (..\eurocode\yqfile.h)(0x5A15169B)
+I (..\eurocode\yqscreen.h)(0x5A1FC7C2)
+I (..\eurocode\yqdrive.h)(0x5A1621D4)
+I (..\eurocode\my_cmd.h)(0x5A20C96A)
+I (..\System\Hsmmc.h)(0x59E80660)
+I (..\Fatfs\ff.h)(0x52D56672)
+I (..\Fatfs\integer.h)(0x594F588B)
+I (..\Fatfs\ffconf.h)(0x59FC07D9)
+I (..\Fatfs\diskio.h)(0x52D56672)
+I (..\Apps\RTC.h)(0x59535729)
+I (..\eurocode\log.h)(0x59561436)
+F (..\eurocode\yqsqlite3.c)(0x5A210701)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\yqsqlite3.o --omf_browse .\objects\yqsqlite3.crf --depend .\objects\yqsqlite3.d)
+I (..\System\s3c2416.h)(0x5A20F9C5)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F606B8)
+I (..\System\exception.h)(0x59E6ADF1)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x57F606B6)
+I (..\System\uart.h)(0x595F07E0)
+I (..\System\def.h)(0x5A0D3635)
+I (..\System\nand.h)(0x5A1F78B4)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x57F606B6)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x5A1917FB)
+I (..\eurocode\yqsqlite3.h)(0x5A210625)
+I (..\eurocode\AD_filter.h)(0x59084C60)
+I (..\eurocode\yqadc.h)(0x5A25063E)
+I (..\eurocode\yqfile.h)(0x5A15169B)
+I (..\eurocode\yqscreen.h)(0x5A1FC7C2)
+I (..\eurocode\yqdrive.h)(0x5A1621D4)
+I (..\eurocode\my_cmd.h)(0x5A20C96A)
+I (..\System\Hsmmc.h)(0x59E80660)
+I (..\Fatfs\ff.h)(0x52D56672)
+I (..\Fatfs\integer.h)(0x594F588B)
+I (..\Fatfs\ffconf.h)(0x59FC07D9)
+I (..\Fatfs\diskio.h)(0x52D56672)
+I (..\Apps\RTC.h)(0x59535729)
+I (..\eurocode\log.h)(0x59561436)
+F (..\eurocode\yqdrive.c)(0x5A20F9C5)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\yqdrive.o --omf_browse .\objects\yqdrive.crf --depend .\objects\yqdrive.d)
+I (..\System\s3c2416.h)(0x5A20F9C5)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F606B8)
+I (..\System\exception.h)(0x59E6ADF1)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x57F606B6)
+I (..\System\uart.h)(0x595F07E0)
+I (..\System\def.h)(0x5A0D3635)
+I (..\System\nand.h)(0x5A1F78B4)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x57F606B6)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x5A1917FB)
+I (..\eurocode\yqsqlite3.h)(0x5A210625)
+I (..\eurocode\AD_filter.h)(0x59084C60)
+I (..\eurocode\yqadc.h)(0x5A25063E)
+I (..\eurocode\yqfile.h)(0x5A15169B)
+I (..\eurocode\yqscreen.h)(0x5A1FC7C2)
+I (..\eurocode\yqdrive.h)(0x5A1621D4)
+I (..\eurocode\my_cmd.h)(0x5A20C96A)
+I (..\System\Hsmmc.h)(0x59E80660)
+I (..\Fatfs\ff.h)(0x52D56672)
+I (..\Fatfs\integer.h)(0x594F588B)
+I (..\Fatfs\ffconf.h)(0x59FC07D9)
+I (..\Fatfs\diskio.h)(0x52D56672)
+I (..\Apps\RTC.h)(0x59535729)
+I (..\eurocode\log.h)(0x59561436)
+F (..\eurocode\AD_filter.c)(0x59084FD6)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\ad_filter.o --omf_browse .\objects\ad_filter.crf --depend .\objects\ad_filter.d)
+I (..\System\def.h)(0x5A0D3635)
+F (..\eurocode\my_cmd.c)(0x5A265A96)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\my_cmd.o --omf_browse .\objects\my_cmd.crf --depend .\objects\my_cmd.d)
+I (..\System\def.h)(0x5A0D3635)
+I (..\System\S3C2416.h)(0x5A20F9C5)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F606B8)
+I (..\System\exception.h)(0x59E6ADF1)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x57F606B6)
+I (..\System\uart.h)(0x595F07E0)
+I (..\System\nand.h)(0x5A1F78B4)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x57F606B6)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x5A1917FB)
+I (..\eurocode\yqsqlite3.h)(0x5A210625)
+I (..\eurocode\AD_filter.h)(0x59084C60)
+I (..\eurocode\yqadc.h)(0x5A25063E)
+I (..\eurocode\yqfile.h)(0x5A15169B)
+I (..\eurocode\yqscreen.h)(0x5A1FC7C2)
+I (..\eurocode\yqdrive.h)(0x5A1621D4)
+I (..\eurocode\my_cmd.h)(0x5A20C96A)
+I (..\System\Hsmmc.h)(0x59E80660)
+I (..\Fatfs\ff.h)(0x52D56672)
+I (..\Fatfs\integer.h)(0x594F588B)
+I (..\Fatfs\ffconf.h)(0x59FC07D9)
+I (..\Fatfs\diskio.h)(0x52D56672)
+I (..\Apps\RTC.h)(0x59535729)
+I (..\eurocode\log.h)(0x59561436)
+F (..\eurocode\log.c)(0x5A210CF8)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\log.o --omf_browse .\objects\log.crf --depend .\objects\log.d)
+I (..\System\s3c2416.h)(0x5A20F9C5)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F606B8)
+I (..\System\exception.h)(0x59E6ADF1)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x57F606B6)
+I (..\System\uart.h)(0x595F07E0)
+I (..\System\def.h)(0x5A0D3635)
+I (..\System\nand.h)(0x5A1F78B4)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F606B8)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x57F606B6)
+I (..\System\adc.h)(0x55B8259E)
+I (..\eurocode\yqcoin.h)(0x5A1917FB)
+I (..\eurocode\yqsqlite3.h)(0x5A210625)
+I (..\eurocode\AD_filter.h)(0x59084C60)
+I (..\eurocode\yqadc.h)(0x5A25063E)
+I (..\eurocode\yqfile.h)(0x5A15169B)
+I (..\eurocode\yqscreen.h)(0x5A1FC7C2)
+I (..\eurocode\yqdrive.h)(0x5A1621D4)
+I (..\eurocode\my_cmd.h)(0x5A20C96A)
+I (..\System\Hsmmc.h)(0x59E80660)
+I (..\Fatfs\ff.h)(0x52D56672)
+I (..\Fatfs\integer.h)(0x594F588B)
+I (..\Fatfs\ffconf.h)(0x59FC07D9)
+I (..\Fatfs\diskio.h)(0x52D56672)
+I (..\Apps\RTC.h)(0x59535729)
+I (..\eurocode\log.h)(0x59561436)
+F (.\README.TXT)(0x59002AA7)()
+F (..\Fatfs\diskio.c)(0x59FC0883)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\diskio.o --omf_browse .\objects\diskio.crf --depend .\objects\diskio.d)
+I (..\Fatfs\diskio.h)(0x52D56672)
+I (..\Fatfs\integer.h)(0x594F588B)
+I (..\System\Hsmmc.h)(0x59E80660)
+I (..\Apps\RTC.h)(0x59535729)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F606B8)
+F (..\Fatfs\ff.c)(0x59FC0A3C)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\ff.o --omf_browse .\objects\ff.crf --depend .\objects\ff.d)
+I (..\Fatfs\ff.h)(0x52D56672)
+I (..\Fatfs\integer.h)(0x594F588B)
+I (..\Fatfs\ffconf.h)(0x59FC07D9)
+I (..\Fatfs\diskio.h)(0x52D56672)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x57F606B8)
+F (..\Fatfs\option\ccsbcs.c)(0x52D56672)(--c99 -c --cpu ARM926EJ-S -g -O0 --apcs=interwork -I ..\System -I ..\eurocode -I ..\Apps -I ..\Fatfs-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\Inc\Samsung-D__UVISION_VERSION="523"-o .\objects\ccsbcs.o --omf_browse .\objects\ccsbcs.crf --depend .\objects\ccsbcs.d)
+I (..\Fatfs\option\../ff.h)(0x52D56672)
+I (..\Fatfs\option\../integer.h)(0x594F588B)
+I (..\Fatfs\option\../ffconf.h)(0x59FC07D9)
