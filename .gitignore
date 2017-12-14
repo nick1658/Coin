@@ -18,6 +18,7 @@
 *.axf
 *.__i
 *.TMP
+*.map
 
 # Precompiled Headers
 *.gch
