@@ -247,7 +247,6 @@ void cy_ad0_valueget(void)
 		{
 			AD_Sample_All ();
 			blockflag = ADBLOCKT;	   //使用鉴伪传感器 报堵币
-			coin_env.ad0_step = 6;
 			/* 
 			if ((detect_sample_data_buf_index) > para_set_value.data.adj_offset_position){
 				detect_sample_data_buf_index -= 3000;
@@ -294,15 +293,7 @@ void cy_ad0_valueget(void)
 				}
 				detect_sample_data_buf_index = 0;
 			}*/
-			break;
-		}
-/*获取均值与参考值对比及变化的步骤执行*/
-		case 6: 					//read in ad value ADSAMPNUM times 
-		{
-			blockflag = ADBLOCKT;	   //使用鉴伪传感器 报堵币5
-			/*当前步骤3的采样值小于标准参考值时 coin_env.std_down_value0 ad0-50 ,ad0 采样8次均值*/
 			if( (ad0_ad_value < coin_env.std_down_value0)){  //std_value	standard value for detect  从平均值的监测改为当前值的监测
-			
 				wave0down_flagone++;    //小于参考值  则表示有硬币过来
 			}
 			/*均值大于参考值时*/
@@ -316,8 +307,7 @@ void cy_ad0_valueget(void)
 				wave0down_flagone = 0;
 				detect_sample_data_buf_index = 0;
 				break;
-			}else{/*返回步骤3采集*/
-				coin_env.ad0_step  = 3;	
+			}else{
 				detect_sample_data_buf_index = 0;					
 			}
 			break;

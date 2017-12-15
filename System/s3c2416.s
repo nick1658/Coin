@@ -84,15 +84,14 @@ Vectors     B       Reset_Handler
             LDR     PC, PAbt_Addr
             LDR     PC, DAbt_Addr
 			LDR		PC, Notuse_Addr
-JmpIRQ		B		IRQ_SaveContext
-;JmpFIQ		B	JmpFIQ;	
+			LDR		PC, IRQ_Addr
 			LDR		PC, FIQ_Addr
 
 			IMPORT	Undef_Handler
 			IMPORT	SWI_Handler
 			IMPORT	PAbt_Handler
 			IMPORT	DAbt_Handler
-			IMPORT	IRQ_Handler
+			IMPORT	IRQ_SaveContext
 			IMPORT	FIQ_Handler				
 Reset_Addr  DCD   Reset_Handler
 Undef_Addr  DCD   Undef_Handler
@@ -100,27 +99,28 @@ SWI_Addr    DCD   SWI_Handler
 PAbt_Addr   DCD   PAbt_Handler
 DAbt_Addr   DCD   DAbt_Handler
 Notuse_Addr DCD   0           ; Reserved Address 
-FIQ_Addr	DCD	  FIQ_Handler
+IRQ_Addr	DCD   IRQ_SaveContext
 Magic_num	DCD	  0x55aa1a25
-IRQ_SaveContext
+FIQ_Addr	DCD	  FIQ_Handler
+;IRQ_SaveContext
 ; 保存中断上下文，支持中断嵌套				
-			SUB	LR, LR, #4 ; 计算返回地址
-			STMFD SP!, {R0-R12, LR} ;所有寄存器压栈保存
-			MRS 	R0, SPSR ; 保存中断前的CPSR(即现在的SPSR)
-			STMFD	SP!, {R0} ;
-			MSR	CPSR_cxsf, #Mode_SYS+I_Bit ; 切换到系统模式	
-			STMFD 	SP!, {LR} ; 压栈系统模式LR
-				
-			LDR 	R0, =IRQ_Handler ;系统模式下进行IRQ代码处理
-			MOV		LR, PC ; 准备函数的返回地址
- 			BX		R0 ; 调用中断处理函数
-			
-			LDMFD	SP!, {LR} ; 出栈系统模式LR
-			MSR	CPSR_cxsf, #Mode_IRQ+I_Bit ; 切换到IRQ模式					
-			LDMFD 	SP!, {R0} ; 返回中断前的CPSR				
-			MSR   	SPSR_cxsf, R0
-			LDMFD  SP!, {R0-R12, PC}^ ; ^表同时从spsr恢复给cpsr
-
+;			SUB	LR, LR, #4 ; 计算返回地址
+;			STMFD SP!, {R0-R12, LR} ;所有寄存器压栈保存
+;			MRS 	R0, SPSR ; 保存中断前的CPSR(即现在的SPSR)
+;			STMFD	SP!, {R0} ;
+;			MSR	CPSR_cxsf, #Mode_SYS+I_Bit ; 切换到系统模式	
+;			STMFD 	SP!, {LR} ; 压栈系统模式LR
+;				
+;			LDR 	R0, =IRQ_Handler ;系统模式下进行IRQ代码处理
+;			MOV		LR, PC ; 准备函数的返回地址
+; 			BX		R0 ; 调用中断处理函数
+;			
+;			LDMFD	SP!, {LR} ; 出栈系统模式LR
+;			MSR	CPSR_cxsf, #Mode_IRQ+I_Bit ; 切换到IRQ模式					
+;			LDMFD 	SP!, {R0} ; 返回中断前的CPSR				
+;			MSR   	SPSR_cxsf, R0
+;			LDMFD  SP!, {R0-R12, PC}^ ; ^表同时从spsr恢复给cpsr
+;
         EXPORT  Reset_Handler
 Reset_Handler
 ;/***********************************************************************/

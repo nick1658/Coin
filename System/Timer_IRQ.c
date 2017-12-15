@@ -23,16 +23,10 @@ volatile U32 tscount=0;
 //20msÖÐ¶ÏÒ»´Î
 void Timer4_IRQ(void)
 {   
-	static U32 T4_count = 0;
-	T4_count++;
 	time_20ms++;
 	if (sys_env.tty_online_ms > 1){sys_env.tty_online_ms--;}
 	
 	if (sys_env.stop_time > 0){sys_env.stop_time--;}
-	if (T4_count > 25){
-		T4_count = 0;
-		LED2_NOT;
-	}
 	if(tscount >0){tscount--;}
 	if( blockflag> 0){blockflag--;}				
 	if(adtime >0){adtime--;}
@@ -98,28 +92,14 @@ void Timer4_Init(unsigned short us, void (*Callback)(void), unsigned short enabl
 	}\
 }
 
+extern void main_task(void);
 void Timer3_IRQ(void)
 {   
+	main_task ();
 	KICK_Q_SCAN(0);
 	KICK_Q_SCAN(1);
-//	KICK_Q_SCAN(2);
-//	KICK_Q_SCAN(3);
-//	KICK_Q_SCAN(4);
-//	KICK_Q_SCAN(5);
-//	KICK_Q_SCAN(6);
-//	KICK_Q_SCAN(7);
-//	KICK_Q_SCAN(8);
-//	KICK_Q_SCAN(9);
 	FULL_KICK_Q_SCAN(0);
 	FULL_KICK_Q_SCAN(1);
-//	FULL_KICK_Q_SCAN(2);
-//	FULL_KICK_Q_SCAN(3);
-//	FULL_KICK_Q_SCAN(4);
-//	FULL_KICK_Q_SCAN(5);
-//	FULL_KICK_Q_SCAN(6);
-//	FULL_KICK_Q_SCAN(7);
-//	FULL_KICK_Q_SCAN(8);
-//	FULL_KICK_Q_SCAN(9);
 	
 	if (coin_env.kick_keep_t1 > 0){
 		coin_env.kick_keep_t1--;
@@ -243,7 +223,6 @@ void Timer1_IRQ (void)
 {
 	IRQ_DisableInt(INT_TIMER1);
 	cy_println ("\n--------------------------------------------------------------------------Timer1_IRQ");
-	while (1);
 }
 static void Timer1_Handler(void)
 {	
@@ -345,7 +324,7 @@ void Timer_Init (void)
 	Timer3_Callback = timer_update;
 	Timer4_Callback = timer_update;
 	
-	//Timer0_Init(1000, Timer0_IRQ);//1ms
+	Timer0_Init(1000, OSTimeTick, 1);//1ms
 	//Timer1_Init(1000, OSTimeTick);//1ms
 	Timer1_Init(23000, Timer1_IRQ, 1);//1ms
 	Timer2_Init(500, Timer2_IRQ, 1);//0.5ms
@@ -355,7 +334,7 @@ void Timer_Init (void)
 	Timer3_Start ();
 	Timer2_Start ();
 	Timer1_Start ();
-	//Timer0_Start ();
+	Timer0_Start ();
 }
 
 

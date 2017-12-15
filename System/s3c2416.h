@@ -39,6 +39,9 @@ extern "C" {
 #include "diskio.h" 
 #include "RTC.h"
 #include "log.h"
+
+
+#include "ucos_ii.h"
 	
 //#define __MY_DEBUG__
 //#define UART_DEBUG	

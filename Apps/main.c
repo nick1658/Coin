@@ -18,15 +18,12 @@ int check_ad1_ad2_value (void);
 
 //主函数
 
-int main(void)
+void coin_init (void)
 {
-
-	
 	U16 i=0;
 	rWTCON = 0;	// 关闭开门狗
  	port_Init();
 	uart_init();//115200bps
-	
 	system_env_init ();
 	coin_env_init ();
 	//////////////  
@@ -158,8 +155,13 @@ int main(void)
 	adstd_offset ();//设置补偿值，后面每次启动之前都会补偿一次，因为鉴伪基准值会随温度在一定范围内变化
 	
 	comscreen(Disp_Indexpic[JSJM],Number_IndexpicB);	  // 跳转到主界面
+}
+
+void main_task(void)
+{
+	int i = 0;
 	//i = CRC16 (iap_code_buf, sizeof(iap_code_buf));
-	while(1)
+	//while(1)
 	{
 		switch (sys_env.workstep)
 		{
@@ -211,18 +213,12 @@ int main(void)
 				break;
 			}
 			case 10:{        //main  proceed
-				int t1, t2;
-				t2 = rTCNTO1;
-				if (t1 > t2){
-					cy_println ("%d - %d = %d",t1, t2, t1 - t2);
-				}else{
-					cy_println ("%d ,  %d",t1, t2);
-				}
+				//int t1, t2;
+				//t1 = rTCNTO1;
 				cy_ad0_valueget();    //check coin wave and get ADSAMPNUM of ad  values
 				cy_ad1_valueget();    //check coin wave and get ADSAMPNUM of ad  values
 				cy_ad2_valueget();    //check coin wave and get ADSAMPNUM of ad  values
 				//////////////////////////////////////////////////////////////////////
-				t1 = rTCNTO1;
 				cy_precoincount();   //鉴伪、计数
 				IR_detect_func();   //第二个踢币程序
 				runfunction();	 //转盘动作函数
@@ -248,8 +244,7 @@ int main(void)
 						sys_env.workstep =0;	
 						if (processed_coin_info.total_coin > 0){
 							LOG ("\n----------------------------------------------------------------------");
-							LOG ("[Start At %4d-%02d-%02d %02d:%02d:%02d] ", 
-								Time.Year, Time.Month, Time.Day, Time.Hour, Time.Min, Time.Sec);
+							//LOG ("[Start At %4d-%02d-%02d %02d:%02d:%02d] ", Time.Year, Time.Month, Time.Day, Time.Hour, Time.Min, Time.Sec);
 							LOG("   币种  数量(枚)  金额(元)");
 							LOG("   1分     %4d     %d.%d%d",coin_num[8],((coine[coinchoose][8]*coin_num[8])/100),(((coine[coinchoose][8]*coin_num[8])%100)/10),(((coine[coinchoose][8]*coin_num[8])%100)%10));
 							LOG("   2分     %4d     %d.%d%d",coin_num[7],((coine[coinchoose][7]*coin_num[7])/100),(((coine[coinchoose][7]*coin_num[7])%100)/10),(((coine[coinchoose][7]*coin_num[7])%100)%10));
@@ -267,13 +262,13 @@ int main(void)
 						}
 					}
 				}
-				//cy_println ("hello world");
-				t2 = rTCNTO1;
-				if (t1 > t2){
-					cy_println ("%d - %d = %d",t1, t2, t1 - t2);
-				}else{
-					cy_println ("%d ,  %d",t1, t2);
-				}
+//				t2 = rTCNTO1;
+//				if (t1 > t2){
+//					cy_println ("%d - %d = %d",t1, t2, t1 - t2);
+//				}else{
+//					cy_println ("%d ,  %d",t1, t2);
+//				}
+//				t1 = t2;
 				break;
 			}
 			/////////////////
@@ -331,6 +326,15 @@ int main(void)
 			sys_env.tty_online_ms = 0;
 			update_finish ();
 		}
+	}	
+}
+
+void Task2(void *pdata)
+{
+	(void)pdata;
+	while (1) {
+		//LED1_NOT;
+		OSTimeDly(20); // LED4 1500ms闪烁
 		if( touch_flag ==1){
 			touchresult();//判断触摸 状态的函数
 			touch_flag =0;
@@ -339,5 +343,48 @@ int main(void)
 			vTaskCmdAnalyze ();//串口命令处理函数
 			sys_env.uart0_cmd_flag = 0;
 		}
-	}	
+	}
 }
+
+void Task1(void *pdata)
+{
+	(void)pdata;
+	while (1) {
+		LED2_NOT;
+		OSTimeDly(500); // LED3 1000ms闪烁
+		cy_print(" OSIdleCtrRun: %ld  OSIdleCtrMax: %ld  \n", OSIdleCtrRun, OSIdleCtrMax);  
+		cy_print(" CPU Usage: %02d%%\n",OSCPUUsage);  
+		//cy_println ("***********************task 1***********************");
+	}
+}
+
+OS_STK  TaskStartStk[TASK_START_STK_SIZE];
+OS_STK  Task1Stk[TASK1_STK_SIZE];
+OS_STK  Task2Stk[TASK2_STK_SIZE];
+OS_STK  Task3Stk[TASK3_STK_SIZE];
+
+void TaskStart(void *pdata)
+{
+	(void)pdata;
+	coin_init ();
+	
+	OSStatInit(); //开启统计任务 
+	cy_println ("***********************UCOS for S3C2416***********************");
+
+	OSTaskCreate(Task1, (void *)0, &Task1Stk[TASK1_STK_SIZE - 1], Task1Prio);
+	OSTaskCreate(Task2, (void *)0, &Task2Stk[TASK2_STK_SIZE - 1], Task2Prio);
+	//OSTaskCreate(Task3, (void *)0, &Task3Stk[TASK3_STK_SIZE - 1], Task3Prio);
+	while (1) {
+		OSTimeDly(500); // LED2 500ms闪烁
+	}
+}
+
+int main (void)
+{
+	//main_task (0);
+	OSInit(); // 初始化uCOS
+	OSTaskCreate(TaskStart, (void *)0, &TaskStartStk[TASK_START_STK_SIZE-1], TaskStartPrio);
+    OSStart(); // 开始uCOS调度
+	return 0;
+}
+

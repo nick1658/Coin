@@ -8,6 +8,7 @@ The initial Watch Dog
 
 void wt_handler (void)
 {
+	cy_println( "WatchDog Handler");
 }
 //初始化看门狗
 void watchdog_reset(void)      //看门狗复位函数
@@ -20,10 +21,10 @@ void watchdog_reset(void)      //看门狗复位函数
 	rWTDAT=WatchDogTimer;
 	rWTCNT=WatchDogTimer;
 	/*---------------------------------------------------*/
-	//rWTCON &= ~(2<<1);    //禁止看门狗中断
-	rWTCON |= (2<<1);    //允许看门狗中断
-	IRQ_Register(INT_WDT_AC97, wt_handler);
-	IRQ_EnableInt(INT_WDT_AC97);
+	rWTCON &= ~(2<<1);    //禁止看门狗中断
+	//rWTCON |= (2<<1);    //允许看门狗中断
+	//IRQ_Register(INT_WDT_AC97, wt_handler);
+	//IRQ_EnableInt(INT_WDT_AC97);
 
 	rWTCON|=((1<<5)|(1<<0));   //允许看门狗定时，允许复位
 //	while(1);
