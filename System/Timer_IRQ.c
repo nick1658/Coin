@@ -57,8 +57,8 @@ void Timer4_Stop(void)
 	rTCON &= ~(0x1 << 20); // 定时器停止
 }
 
-// 1us ~ 65ms
-void Timer4_Init(unsigned short us, void (*Callback)(void))
+// 1us ~ 23ms
+void Timer4_Init(unsigned short us, void (*Callback)(void), unsigned short enable_int)
 {
 // 定时器4时钟频率为PCLK(66M)/(5+1)/4=2750KHZ
 	if (us == 0) {
@@ -76,7 +76,9 @@ void Timer4_Init(unsigned short us, void (*Callback)(void))
 	if (Callback != 0) {
 		Timer4_Callback = Callback;
 		IRQ_Register(INT_TIMER4, Timer4_Handler);
-		IRQ_EnableInt(INT_TIMER4);
+		if (enable_int == 1){
+			IRQ_EnableInt(INT_TIMER4);
+		}
 	}
 }
 
@@ -152,8 +154,8 @@ void Timer3_Stop(void)
 	rTCON |= (0x1 << 17); // 更新计数值
 	rTCON &= ~(0x1 << 17); // 清除
 }
-// 1us ~ 65ms
-void Timer3_Init(unsigned short us, void (*Callback)(void))
+// 1us ~ 23ms
+void Timer3_Init(unsigned short us, void (*Callback)(void), unsigned short enable_int)
 {
 // 定时器3时钟频率为PCLK(66M)/(5+1)/4=2750KHZ
 	if (us == 0) {
@@ -171,7 +173,9 @@ void Timer3_Init(unsigned short us, void (*Callback)(void))
 	if (Callback != 0) {
 		Timer3_Callback = Callback;
 		IRQ_Register(INT_TIMER3, Timer3_Handler);
-		IRQ_EnableInt(INT_TIMER3);
+		if (enable_int == 1){
+			IRQ_EnableInt(INT_TIMER3);
+		}
 	}
 }
 
@@ -208,8 +212,8 @@ void Timer2_Stop(void)
 	rTCON &= ~(0x1 << 12); // 定时器停止
 }
 
-// 1us ~ 65ms
-void Timer2_Init(unsigned short us, void (*Callback)(void))
+// 1us ~ 23ms
+void Timer2_Init(unsigned short us, void (*Callback)(void), unsigned short enable_int)
 {
 // 定时器2时钟频率为PCLK(66M)/(5+1)/4=2750KHZ
 	if (us == 0) {
@@ -227,7 +231,9 @@ void Timer2_Init(unsigned short us, void (*Callback)(void))
 	if (Callback != 0) {
 		Timer2_Callback = Callback;
 		IRQ_Register(INT_TIMER2, Timer2_Handler);
-		IRQ_EnableInt(INT_TIMER2);
+		if (enable_int == 1){
+			IRQ_EnableInt(INT_TIMER2);
+		}
 	}
 }
 
@@ -235,13 +241,9 @@ void Timer2_Init(unsigned short us, void (*Callback)(void))
 
 void Timer1_IRQ (void)
 {
-	static U32 T_count = 0;
-	T_count++;
-	
-	if (T_count > 1000){
-		T_count = 0;
-		//LED3_NOT;
-	}
+	IRQ_DisableInt(INT_TIMER1);
+	cy_println ("\n--------------------------------------------------------------------------Timer1_IRQ");
+	while (1);
 }
 static void Timer1_Handler(void)
 {	
@@ -257,8 +259,8 @@ void Timer1_Stop(void)
 	rTCON &= ~(0x1 << 8); // 定时器停止
 }
 
-// 1us ~ 65ms
-void Timer1_Init(unsigned short us, void (*Callback)(void))
+// 1us ~ 23ms
+void Timer1_Init(unsigned short us, void (*Callback)(void), unsigned short enable_int)
 {
 // 定时器1时钟频率为PCLK(66M)/(5+1)/4=2750KHZ
 	if (us == 0) {
@@ -276,7 +278,9 @@ void Timer1_Init(unsigned short us, void (*Callback)(void))
 	if (Callback != 0) {
 		Timer1_Callback = Callback;
 		IRQ_Register(INT_TIMER1, Timer1_Handler);
-		IRQ_EnableInt(INT_TIMER1);
+		if (enable_int == 1){
+			IRQ_EnableInt(INT_TIMER1);
+		}
 	}
 }
 
@@ -307,8 +311,8 @@ void Timer0_Stop(void)
 	rTCON &= ~(0x1 << 0); // 定时器停止
 }
 
-// 1us ~ 65ms
-void Timer0_Init(unsigned short us, void (*Callback)(void))
+// 1us ~ 23ms
+void Timer0_Init(unsigned short us, void (*Callback)(void), unsigned short enable_int)
 {
 // 定时器0时钟频率为PCLK(66M)/(5+1)/4=2750KHZ
 	if (us == 0) {
@@ -326,7 +330,9 @@ void Timer0_Init(unsigned short us, void (*Callback)(void))
 	if (Callback != 0) {
 		Timer0_Callback = Callback;
 		IRQ_Register(INT_TIMER0, Timer0_Handler);
-		IRQ_EnableInt(INT_TIMER0);
+		if (enable_int == 1){
+			IRQ_EnableInt(INT_TIMER0);
+		}
 	}
 }
 
@@ -341,14 +347,14 @@ void Timer_Init (void)
 	
 	//Timer0_Init(1000, Timer0_IRQ);//1ms
 	//Timer1_Init(1000, OSTimeTick);//1ms
-	//Timer1_Init(1000, Timer1_IRQ);//1ms
-	Timer2_Init(500, Timer2_IRQ);//0.5ms
-	Timer3_Init(100, Timer3_IRQ);//0.1ms
-	Timer4_Init(20000, Timer4_IRQ);//20ms
+	Timer1_Init(23000, Timer1_IRQ, 1);//1ms
+	Timer2_Init(500, Timer2_IRQ, 1);//0.5ms
+	Timer3_Init(100, Timer3_IRQ, 1);//0.1ms
+	Timer4_Init(20000, Timer4_IRQ, 1);//20ms
 	Timer4_Start ();
 	Timer3_Start ();
 	Timer2_Start ();
-	//Timer1_Start ();
+	Timer1_Start ();
 	//Timer0_Start ();
 }
 

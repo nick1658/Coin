@@ -81,8 +81,8 @@ int main(void)
 	uart2_init();//屏幕
 	cy_println ("\n#####    Program For YQ ##### ");
 	i = 1;
-	Timer_Init ();
 	watchdog_reset();/*初始化看门狗,T = WTCNT * t_watchdog*/
+	Timer_Init ();
 	
 	//init RTC************************************************************
 	RTC_Time Time = {
@@ -179,7 +179,8 @@ int main(void)
 			}
 			case 6: {    
 				setStdValue	();//设置鉴伪基准值
-				if( adstd_offset() == 1){//  检测基准值，并进行补偿
+				//if( adstd_offset() == 1){//  检测基准值，并进行补偿
+				if (1) {//  检测基准值，并进行补偿
 					sys_env.stop_time = STOP_TIME;//无币停机时间
 					sys_env.workstep =10;
 					if ((sys_env.auto_clear == 1) || para_set_value.data.coin_full_rej_pos == 3){//如果设置自动清零，则每次启动都清零计数
@@ -210,10 +211,18 @@ int main(void)
 				break;
 			}
 			case 10:{        //main  proceed
+				int t1, t2;
+				t2 = rTCNTO1;
+				if (t1 > t2){
+					cy_println ("%d - %d = %d",t1, t2, t1 - t2);
+				}else{
+					cy_println ("%d ,  %d",t1, t2);
+				}
 				cy_ad0_valueget();    //check coin wave and get ADSAMPNUM of ad  values
 				cy_ad1_valueget();    //check coin wave and get ADSAMPNUM of ad  values
 				cy_ad2_valueget();    //check coin wave and get ADSAMPNUM of ad  values
 				//////////////////////////////////////////////////////////////////////
+				t1 = rTCNTO1;
 				cy_precoincount();   //鉴伪、计数
 				IR_detect_func();   //第二个踢币程序
 				runfunction();	 //转盘动作函数
@@ -257,6 +266,13 @@ int main(void)
 														((processed_coin_info.total_coin * 3000) / (time_20ms_old - STOP_TIME * 3 - 50)));
 						}
 					}
+				}
+				//cy_println ("hello world");
+				t2 = rTCNTO1;
+				if (t1 > t2){
+					cy_println ("%d - %d = %d",t1, t2, t1 - t2);
+				}else{
+					cy_println ("%d ,  %d",t1, t2);
 				}
 				break;
 			}

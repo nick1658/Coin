@@ -57,7 +57,6 @@ volatile U32 adtime = 0;    //定时中断里 计时
  U32 ch0_count =0;  //通道0 通过的硬币计数 
  U32 ch0_pre_count =0;  //通道0 来硬币 标记  
  U32 ch0_coin_come =0;  //通道 来硬币 标记
- U16 ch0_coin_leave = 0;
  volatile U16 blockflag = 0;      //堵币标志变量
  U16 ad0_min = 0;     //贮存每枚硬币过去后的 最大值
  
@@ -209,7 +208,6 @@ void cy_ad0_valueget(void)
 			ch0_counttemp = ch0_count;
 			ch0_pre_count = ch0_count;
 			
-			ch0_coin_leave = 0;
 			ch0_coin_come = 0;
 			
 			wave0down_flagone = 0;
@@ -250,7 +248,6 @@ void cy_ad0_valueget(void)
 			AD_Sample_All ();
 			blockflag = ADBLOCKT;	   //使用鉴伪传感器 报堵币
 			coin_env.ad0_step = 6;
-			ch0_coin_leave = 0;
 			/* 
 			if ((detect_sample_data_buf_index) > para_set_value.data.adj_offset_position){
 				detect_sample_data_buf_index -= 3000;
@@ -394,7 +391,6 @@ void cy_ad0_valueget(void)
 			/*已经恢复参考值,返回初始测量*/
 			if( wave0up_flag > WAVE0fall){// WAVE0fall 2
 				coin_env.ad0_step = 3; //
-				ch0_coin_leave = 1;
 				sys_env.coin_cross_time = coin_cross_time;//硬币出来了，这里统计连币经过的时间
 				blockflag = ADBLOCKT;      //堵币时间复位
 				wave0up_flag =0;

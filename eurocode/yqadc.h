@@ -101,7 +101,6 @@ extern U32 ch1_count;  //通道1 通过的硬币计数
 extern U32 ch2_count;  //通道2 通过的硬币计数 
 
 extern U32 ch0_coin_come;  //通道 来硬币 标记
-extern U16 ch0_coin_leave;  //通道 来硬币 标记
 extern U32 coin_cross_time;
 //extern U32 ch1_come;  //通道 来硬币 标记
 		
