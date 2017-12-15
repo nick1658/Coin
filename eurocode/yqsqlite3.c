@@ -98,10 +98,7 @@ void initial_nandflash(void)    //nandflash
 	cy_println ("Start Check Data ...!");
 	test_read_r_code (Nand_ReadPage(PUBULIC_DATA_START_BLOCK_NUM, PUBULIC_DATA_START_PAGE_NUM, (U8 *)&para_set_value));
 		
-	if(para_set_value.data.magic_num != MAGIC_NUM)    //不满足条件需要初始化    这里每个国家的信息都 初始化了 在界面更换硬币时不用担心值不确定
-	{
-		
-		
+	if(para_set_value.data.magic_num != MAGIC_NUM){    //不满足条件需要初始化    这里每个国家的信息都 初始化了 在界面更换硬币时不用担心值不确定
 		cy_print("#####   FIRST USE ##### \r\n");
 		para_set_value.data.magic_num = MAGIC_NUM;
 		para_set_value.data.coin_id = 0;
@@ -113,13 +110,12 @@ void initial_nandflash(void)    //nandflash
 		para_set_value.data.kick_start_delay_t2 = 1;
 		para_set_value.data.kick_keep_t1 = 80;
 		para_set_value.data.kick_keep_t2 = 80;
-		para_set_value.data.coin_full_rej_pos = 2;
+		para_set_value.data.coin_full_rej_pos = 1;
 		para_set_value.data.motor_idle_t = 400;
 		para_set_value.data.adj_offset_position = 4096;
 		para_set_value.data.pre_count_stop_n = 1;
 		
-		for (i = 0; i < COIN_TYPE_NUM; i++)
-		{
+		for (i = 0; i < COIN_TYPE_NUM; i++){
 			para_set_value.data.precoin_set_num[i] = 9999;
 		}
 	
@@ -128,10 +124,8 @@ void initial_nandflash(void)    //nandflash
 		test_write_r_code (Nand_WritePage(PUBULIC_DATA_START_BLOCK_NUM, PUBULIC_DATA_START_PAGE_NUM, (U8 *)&para_set_value));
 		cy_println ("write block %d page %d completed", PUBULIC_DATA_START_BLOCK_NUM, PUBULIC_DATA_START_PAGE_NUM);
 		
-		for (i = 0; i < COUNTRY_NUM; i++)
-		{
-			for (j = 0; j < COIN_TYPE_NUM; j++)
-			{
+		for (i = 0; i < COUNTRY_NUM; i++){
+			for (j = 0; j < COIN_TYPE_NUM; j++){
 				pre_value.country[i].coin[j].data.max0 = 1023;
 				pre_value.country[i].coin[j].data.min0 = 1023;
 				pre_value.country[i].coin[j].data.max1 = 1023;
