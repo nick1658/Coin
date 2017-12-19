@@ -128,16 +128,20 @@ CPU_SR_Restore
 	IMPORT	OSIntNesting
     IMPORT  IRQ_Handler
 	
-    EXPORT  IRQ_SaveContext
-IRQ_SaveContext
+	
+	IMPORT	is_system_ticks
+		
+	
+    EXPORT  IRQ_SaveContext_os
+IRQ_SaveContext_os
 	SUB     LR, LR, #4                  ; IRQ异常返回地址LR-4
 	STMFD   SP!, {R0-R2}                ; 临时使用的工作寄存器压入IRQ栈
 	MRS     R0, SPSR                    ; 保存异常出现前的CPSR
 	MOV     R1, LR                      ; 保存LR
 	MOV     R2, SP                      ; 保存IRQ栈指针,用来出栈工作寄存器
-	ADD     SP, SP, #(3 * 4)            ; 调整回IRQ栈的位置
+	ADD     SP, SP, #(3 * 4)            ; 恢复IRQ栈原来的位置
                                                                 
-	MSR     CPSR_c, #(I_Bit+F_Bit+Mode_SVC)	; 禁止中断切换到管理模式
+	MSR     CPSR_c, #(I_Bit+F_Bit+Mode_SVC)	; 禁止中断、切换到管理模式保存现场
 
 	STMFD   SP!, {R1}                   ; 压栈打断任务的PC
 	STMFD   SP!, {LR}                   ; 压栈打断任务的LR
@@ -146,20 +150,21 @@ IRQ_SaveContext
 	STMFD   SP!, {R5-R7}                ; 压栈打断任务的R2-R0
 	STMFD   SP!, {R0}                   ; 压栈打断任务的CPSR
 	
-	LDR		R0, =OSIntNesting           ; 获得中断嵌套计数
-	LDRB	R1, [R0]
-	CMP		R1, #0                      ; 判断任务被中断还是中断嵌套
-	BNE		IntteruptNesting            ; 中断嵌套不用更新任务栈指针
+	;LDR		R0, =OSIntNesting           ; 获得中断嵌套计数
+	;LDRB	R1, [R0]
+	;CMP		R1, #0                      ; 判断任务被中断还是中断嵌套
+	;BNE		IntteruptNesting            ; 中断嵌套不用更新任务栈指针
 	
 	LDR     R0, =OSTCBCur               ; 任务被中断打断,获得打断任务TCB
 	LDR     R1, [R0]                    ; 获得打断任务栈指针
 	STR     SP, [R1]                    ; SP栈保存进打断任务栈指针
 	
-IntteruptNesting	
-	LDR		R0, =OSIntEnter             ; 调用OSIntEnter()进行中断嵌套计数
-	MOV		LR, PC
-	BX		R0
+;IntteruptNesting	
+	;LDR		R0, =OSIntEnter             ; 调用OSIntEnter()进行中断嵌套计数
+	;MOV		LR, PC
+	;BX		R0
 
+;开始处理中断
  	MSR     CPSR_c, #(I_Bit+F_Bit+Mode_SYS)	; 切换到系统模式,使用系统模式栈处理中断
 	STMFD 	SP!, {LR} ; 压栈系统模式LR
 	
@@ -168,12 +173,15 @@ IntteruptNesting
 	BX		R0
 
 	LDMFD	SP!, {LR} ; 出栈系统模式LR  
+	
+	
 	MSR     CPSR_c, #(I_Bit+F_Bit+Mode_SVC)	; 切换到管理模式,使用任务栈进行出栈	
-
-	LDR		R0, =OSIntExit        ; 调用OSIntExit()进行中断减计数,可能不返回
+	
+	LDR		R0, =is_system_ticks           ; 判断是不是系统心跳中断
 	MOV		LR, PC 
 	BX		R0
 
+IntReturn
 	LDMFD   SP!, {R0}                     ; 中断发生嵌套,出栈上一个中断的上下文
 	MSR     SPSR_cxsf, R0
 	LDMFD   SP!, {R0-R12, LR, PC}^

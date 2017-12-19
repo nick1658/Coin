@@ -127,7 +127,7 @@ void cy_precoincount(void)
 					coin_env.coin_Q[coin_env.coin_Q_remain] = COIN_NG_FLAG;//
 				}else{//剔除工位1队列追尾错误
 					SEND_ERROR(KICK1COINERROR);
-					cy_println ("kick1 error alertflag = %d %s, %d", KICK1COINERROR,  __FILE__, __LINE__);
+					dbg ("kick1 error alertflag = %d %s, %d", KICK1COINERROR,  __FILE__, __LINE__);
 				}
 			}else {//真币
 				if (*(pre_value.country[COUNTRY_ID].coin[good_coin].data.p_pre_count_set) == 9999){//只使用清分功能
@@ -162,9 +162,9 @@ void cy_precoincount(void)
 //					cy_println ("detect 2 error alertflag = %d %s, %d", DETECTERROR,  __FILE__, __LINE__);
 //				}
 			}
-			disp_allcount ();
 			processed_coin_info.total_coin++;
 			ccstep = 0;
+			sys_env.coin_over = 1;
 			break;
 		}		
 	}
@@ -220,7 +220,8 @@ void cy_coinlearn(void)
 			if( ( coin_value2 < coin_minvalue2)){
 				coin_minvalue2 = coin_value2;
 			}
-			ccstep = 11; 	
+			ccstep = 0; 
+			sys_env.coin_over = 1;	
 			break;
 		}
 		case 11:{
@@ -325,7 +326,6 @@ void alertfuc(U16 errorflag) //报错
 			ALERT_MSG ("提示", "异常，请重新启动");
 			break;
 	}
-	sys_env.workstep = 0; 
 	return;
 }
 	

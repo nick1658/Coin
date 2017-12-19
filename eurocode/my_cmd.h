@@ -93,6 +93,7 @@ typedef struct
 	U16 stop_flag;
 	U32 coin_cross_time;
 	U32 tty_online_ms;
+	U32 coin_over;
 }s_system_env;
 
 extern s_system_env sys_env;

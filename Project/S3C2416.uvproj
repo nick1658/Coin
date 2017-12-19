@@ -374,7 +374,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\System;..\eurocode;..\Apps;..\Fatfs</IncludePath>
+              <IncludePath>..\System;..\eurocode;..\Apps;..\Fatfs;..\Lwip\include;..\Lwip\include\ipv4;..\Lwip\include\netif;..\Lwip\include\posix;..\Lwip\port\include;..\Lwip\port\include\arch;..\Common;..\uCOS-II\Cfg;..\uCOS-II\Ports;..\uCOS-II\Source</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -567,6 +567,101 @@
               <FileName>ccsbcs.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Fatfs\option\ccsbcs.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>uCOS-II/Cfg</GroupName>
+          <Files>
+            <File>
+              <FileName>os_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\uCOS-II\Cfg\os_cfg.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>uCOS-II/Ports</GroupName>
+          <Files>
+            <File>
+              <FileName>os_cpu.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\uCOS-II\Ports\os_cpu.h</FilePath>
+            </File>
+            <File>
+              <FileName>os_cpu_a.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\uCOS-II\Ports\os_cpu_a.s</FilePath>
+            </File>
+            <File>
+              <FileName>os_cpu_c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\uCOS-II\Ports\os_cpu_c.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>uCOS-II/Source</GroupName>
+          <Files>
+            <File>
+              <FileName>os_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\uCOS-II\Source\os_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_dbg_r.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\uCOS-II\Source\os_dbg_r.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_flag.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\uCOS-II\Source\os_flag.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_mbox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\uCOS-II\Source\os_mbox.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_mem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\uCOS-II\Source\os_mem.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_mutex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\uCOS-II\Source\os_mutex.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_q.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\uCOS-II\Source\os_q.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_sem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\uCOS-II\Source\os_sem.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\uCOS-II\Source\os_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_time.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\uCOS-II\Source\os_time.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_tmr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\uCOS-II\Source\os_tmr.c</FilePath>
+            </File>
+            <File>
+              <FileName>ucos_ii.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\uCOS-II\Source\ucos_ii.h</FilePath>
             </File>
           </Files>
         </Group>

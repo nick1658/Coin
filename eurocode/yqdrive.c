@@ -60,14 +60,14 @@ void IR_detect_func(void)
 						coin_env.full_kick_Q_index %= KICK_Q_LEN;
 					}else{//剔除工位2队列追尾错误
 						SEND_ERROR(KICK2COINERROR);
-						cy_println ("kick2 error alertflag = %d %s, %d", KICK2COINERROR,  __FILE__, __LINE__);
+						dbg ("kick2 error alertflag = %d %s, %d", KICK2COINERROR,  __FILE__, __LINE__);
 					}
 				}else if(coin_env.coin_Q[coin_env.coin_Q_index] == FREE_Q_FLAG){ // 计数队列超车错误，计数不准
 					SEND_ERROR(KICKCOINFULL);
-					cy_println ("kick2 error alertflag = %d %s, %d", KICKCOINFULL,  __FILE__, __LINE__);
+					dbg ("kick2 error alertflag = %d %s, %d", KICKCOINFULL,  __FILE__, __LINE__);
 				}else if(coin_env.coin_Q[coin_env.coin_Q_index] == COIN_NG_FLAG){ //异币漏踢错误
 					SEND_ERROR(COINNGKICKERROR);
-					cy_println ("异币漏踢错误 alertflag = %d %s, %d", COINNGKICKERROR,  __FILE__, __LINE__);
+					dbg ("异币漏踢错误 alertflag = %d %s, %d", COINNGKICKERROR,  __FILE__, __LINE__);
 				}		
 				coin_env.coin_Q[coin_env.coin_Q_index] = FREE_Q_FLAG;
 				coin_env.coin_Q_index++;

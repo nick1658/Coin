@@ -6,7 +6,7 @@
 
 S8 alertflag = 0; 		 //报错标志位
 
-U32 time_20ms;
+//U32 time_20ms;
 U32 time_20ms_old;
 
 
@@ -22,8 +22,6 @@ void coin_init (void)
 {
 	U16 i=0;
 	rWTCON = 0;	// 关闭开门狗
- 	port_Init();
-	uart_init();//115200bps
 	system_env_init ();
 	coin_env_init ();
 	//////////////  
@@ -159,10 +157,104 @@ void coin_init (void)
 
 void main_task(void)
 {
-	int i = 0;
+	static unsigned int running_state = 0;
 	//i = CRC16 (iap_code_buf, sizeof(iap_code_buf));
 	//while(1)
+	running_state++;
+	if (running_state >= 1000){
+		running_state = 0;
+		LED1_NOT;
+	}		
+	
+	switch (sys_env.workstep)
 	{
+		case 10:{        //main  proceed
+			//int t1, t2;
+			//t1 = rTCNTO1;
+			cy_ad0_valueget();    //check coin wave and get ADSAMPNUM of ad  values
+			cy_ad1_valueget();    //check coin wave and get ADSAMPNUM of ad  values
+			cy_ad2_valueget();    //check coin wave and get ADSAMPNUM of ad  values
+			//////////////////////////////////////////////////////////////////////
+			cy_precoincount();   //鉴伪、计数
+			IR_detect_func();   //第二个踢币程序
+//				t2 = rTCNTO1;
+//				if (t1 > t2){
+//					cy_println ("%d - %d = %d",t1, t2, t1 - t2);
+//				}else{
+//					cy_println ("%d ,  %d",t1, t2);
+//				}
+//				t1 = t2;
+			break;
+		}
+		case 22:{
+			cy_ad0_valueget();    //check coin wave and get ADSAMPNUM of ad  values
+			cy_ad1_valueget();    //check coin wave and get ADSAMPNUM of ad  values
+			cy_ad2_valueget();    //check coin wave and get ADSAMPNUM of ad  values
+				
+			cy_coinlearn();   //特征学习
+			IR_detect_func();   //第二个踢币程序
+
+			break;
+		}
+		default:{
+			break;
+		}
+	}
+}
+
+void Task2(void *pdata)
+{
+	(void)pdata;
+	while (1) {
+		//LED1_NOT;
+		OSTimeDly(20); // LED4 1500ms闪烁
+		if( touch_flag ==1){
+			touchresult();//判断触摸 状态的函数
+			touch_flag =0;
+		}
+		if (sys_env.uart0_cmd_flag == 1){
+			vTaskCmdAnalyze ();//串口命令处理函数
+			sys_env.uart0_cmd_flag = 0;
+		}
+		if (sys_env.tty_online_ms == 1){
+			sys_env.tty_online_ms = 0;
+			update_finish ();
+		}
+	}
+}
+
+void Task1(void *pdata)
+{
+	(void)pdata;
+	while (1) {
+		LED2_NOT;
+		OSTimeDly(1000); // LED3 1000ms闪烁
+		//cy_print(" OSIdleCtrRun: %ld  OSIdleCtrMax: %ld  \n", OSIdleCtrRun, OSIdleCtrMax);  
+		//cy_print(" CPU Usage: %02d%%\n",OSCPUUsage);  
+		//cy_println ("***********************task 1***********************");
+	}
+}
+
+OS_STK  TaskStartStk[TASK_START_STK_SIZE];
+OS_STK  Task1Stk[TASK1_STK_SIZE];
+OS_STK  Task2Stk[TASK2_STK_SIZE];
+OS_STK  Task3Stk[TASK3_STK_SIZE];
+
+void TaskStart(void *pdata)
+{
+	int i = 0;
+	(void)pdata;
+	OSStatInit(); //开启统计任务 
+	coin_init ();
+	
+	cy_println ("***********************UCOS for S3C2416***********************");
+
+	OSTaskCreate(Task1, (void *)0, &Task1Stk[TASK1_STK_SIZE - 1], Task1Prio);
+	OSTaskCreate(Task2, (void *)0, &Task2Stk[TASK2_STK_SIZE - 1], Task2Prio);
+	//OSTaskCreate(Task3, (void *)0, &Task3Stk[TASK3_STK_SIZE - 1], Task3Prio);
+	while (1) {
+		OSTimeDly(10); // LED2 500ms闪烁	
+		
 		switch (sys_env.workstep)
 		{
 			case 0:{ 
@@ -204,7 +296,6 @@ void main_task(void)
 						disp_allcount();
 						disp_data(ADDR_CPZE,ADDR_CPZS,ADDR_CPFG);			//when counting pre ze zs foege data variable 
 					}
-					time_20ms = 0;
 				}else{
 					SEND_ERROR(ADSTDEEROR);   //传感器下有币
 					dbg("the voltage is wrong \r\n");
@@ -213,20 +304,13 @@ void main_task(void)
 				break;
 			}
 			case 10:{        //main  proceed
-				//int t1, t2;
-				//t1 = rTCNTO1;
-				cy_ad0_valueget();    //check coin wave and get ADSAMPNUM of ad  values
-				cy_ad1_valueget();    //check coin wave and get ADSAMPNUM of ad  values
-				cy_ad2_valueget();    //check coin wave and get ADSAMPNUM of ad  values
-				//////////////////////////////////////////////////////////////////////
-				cy_precoincount();   //鉴伪、计数
-				IR_detect_func();   //第二个踢币程序
 				runfunction();	 //转盘动作函数
-					 
 				if(blockflag == 0){//堵币
 					SEND_ERROR(PRESSMLOCKED);
 				}
-			
+				if (sys_env.coin_over == 1){
+					disp_allcount ();
+				}
 				if (sys_env.stop_time == 0){
 					sys_env.stop_flag++;
 					if (sys_env.stop_flag == 1){
@@ -239,7 +323,7 @@ void main_task(void)
 						STORAGE_MOTOR_STOPRUN();	//  转盘电机
 						sys_env.stop_time = STOP_TIME;//无币停机时间10秒
 					}else if (sys_env.stop_flag == 4){
-						time_20ms_old = time_20ms;
+	//					time_20ms_old = time_20ms;
 						comscreen(Disp_Indexpic[JSJM],Number_IndexpicB);	 // back to the  picture before alert
 						sys_env.workstep =0;	
 						if (processed_coin_info.total_coin > 0){
@@ -257,18 +341,11 @@ void main_task(void)
 							LOG("   异币:     %d 枚",processed_coin_info.total_ng);
 							LOG("   金额:     %d.%d%d 元",(processed_coin_info.total_money/100),((processed_coin_info.total_money%100)/10),((processed_coin_info.total_money%100)%10));
 							LOG("   总数:     %d + %d = %d 枚",processed_coin_info.total_good, processed_coin_info.total_ng, processed_coin_info.total_coin);
-							LOG("   本次清分耗时: %d Sec 速度: %d / Min", ((time_20ms - (STOP_TIME * 3) - 100) / 50),
-														((processed_coin_info.total_coin * 3000) / (time_20ms_old - STOP_TIME * 3 - 50)));
+	//						LOG("   本次清分耗时: %d Sec 速度: %d / Min", ((time_20ms - (STOP_TIME * 3) - 100) / 50),
+	//													((processed_coin_info.total_coin * 3000) / (time_20ms_old - STOP_TIME * 3 - 50)));
 						}
 					}
 				}
-//				t2 = rTCNTO1;
-//				if (t1 > t2){
-//					cy_println ("%d - %d = %d",t1, t2, t1 - t2);
-//				}else{
-//					cy_println ("%d ,  %d",t1, t2);
-//				}
-//				t1 = t2;
 				break;
 			}
 			/////////////////
@@ -287,13 +364,15 @@ void main_task(void)
 				break;
 			}
 			case 22:{
-				cy_ad0_valueget();    //check coin wave and get ADSAMPNUM of ad  values
-				cy_ad1_valueget();    //check coin wave and get ADSAMPNUM of ad  values
-				cy_ad2_valueget();    //check coin wave and get ADSAMPNUM of ad  values
-					
-				cy_coinlearn();   //特征学习
-				IR_detect_func();   //第二个踢币程序
 				runfunction();	 //转盘动作函数
+				if (sys_env.coin_over == 1){
+					dgus_tf1word(ADDR_A0MA,coin_maxvalue0);	//	 real time ,pre AD0  max
+					dgus_tf1word(ADDR_A0MI,coin_minvalue0);	//	 real time ,pre AD0  min
+					dgus_tf1word(ADDR_A1MA,coin_maxvalue1);	//	 real time ,pre AD1  max	
+					dgus_tf1word(ADDR_A1MI,coin_minvalue1);	//	 real time ,pre AD1  min
+					dgus_tf1word(ADDR_A2MA,coin_maxvalue2);	//	 real time ,pre AD2  max
+					dgus_tf1word(ADDR_A2MI,coin_minvalue2);	//	 real time ,pre AD2  min
+				}
 				
 				if(blockflag == 0){//堵币
 					SEND_ERROR(PRESSMLOCKED);
@@ -303,6 +382,7 @@ void main_task(void)
 			case 88:{//报错	
 				ALL_STOP();
 				alertfuc(alertflag);
+				sys_env.workstep = 0; 
 				//cy_print("sys_env.workstep is %d-->%s %d\n",sys_env.workstep, __FILE__, __LINE__);
 				break;
 			}
@@ -322,66 +402,15 @@ void main_task(void)
 				break;
 			}
 		}
-		if (sys_env.tty_online_ms == 1){
-			sys_env.tty_online_ms = 0;
-			update_finish ();
-		}
-	}	
-}
-
-void Task2(void *pdata)
-{
-	(void)pdata;
-	while (1) {
-		//LED1_NOT;
-		OSTimeDly(20); // LED4 1500ms闪烁
-		if( touch_flag ==1){
-			touchresult();//判断触摸 状态的函数
-			touch_flag =0;
-		}
-		if (sys_env.uart0_cmd_flag == 1){
-			vTaskCmdAnalyze ();//串口命令处理函数
-			sys_env.uart0_cmd_flag = 0;
-		}
-	}
-}
-
-void Task1(void *pdata)
-{
-	(void)pdata;
-	while (1) {
-		LED2_NOT;
-		OSTimeDly(500); // LED3 1000ms闪烁
-		cy_print(" OSIdleCtrRun: %ld  OSIdleCtrMax: %ld  \n", OSIdleCtrRun, OSIdleCtrMax);  
-		cy_print(" CPU Usage: %02d%%\n",OSCPUUsage);  
-		//cy_println ("***********************task 1***********************");
-	}
-}
-
-OS_STK  TaskStartStk[TASK_START_STK_SIZE];
-OS_STK  Task1Stk[TASK1_STK_SIZE];
-OS_STK  Task2Stk[TASK2_STK_SIZE];
-OS_STK  Task3Stk[TASK3_STK_SIZE];
-
-void TaskStart(void *pdata)
-{
-	(void)pdata;
-	coin_init ();
-	
-	OSStatInit(); //开启统计任务 
-	cy_println ("***********************UCOS for S3C2416***********************");
-
-	OSTaskCreate(Task1, (void *)0, &Task1Stk[TASK1_STK_SIZE - 1], Task1Prio);
-	OSTaskCreate(Task2, (void *)0, &Task2Stk[TASK2_STK_SIZE - 1], Task2Prio);
-	//OSTaskCreate(Task3, (void *)0, &Task3Stk[TASK3_STK_SIZE - 1], Task3Prio);
-	while (1) {
-		OSTimeDly(500); // LED2 500ms闪烁
 	}
 }
 
 int main (void)
 {
 	//main_task (0);
+ 	port_Init();
+	uart_init();//115200bps
+	Init_OS_ticks ();
 	OSInit(); // 初始化uCOS
 	OSTaskCreate(TaskStart, (void *)0, &TaskStartStk[TASK_START_STK_SIZE-1], TaskStartPrio);
     OSStart(); // 开始uCOS调度

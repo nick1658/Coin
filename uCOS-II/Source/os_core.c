@@ -1819,7 +1819,9 @@ void  OS_TaskStat (void *p_arg)
         OSIdleCtrRun = OSIdleCtr;                /* Obtain the of the idle counter for the past second */
         OSIdleCtr    = 0uL;                      /* Reset the idle counter for the next second         */
         OS_EXIT_CRITICAL();
-        OSCPUUsage   = (INT8U)(100uL - OSIdleCtrRun / OSIdleCtrMax);
+		if (OSIdleCtrRun < OSIdleCtrMax *100){
+			OSCPUUsage   = (INT8U)(100uL - OSIdleCtrRun / OSIdleCtrMax);
+		}
         OSTaskStatHook();                        /* Invoke user definable hook                         */
 #if (OS_TASK_STAT_STK_CHK_EN > 0u) && (OS_TASK_CREATE_EXT_EN > 0u)
         OS_TaskStatStkChk();                     /* Check the stacks for each task                     */

@@ -89,10 +89,9 @@ typedef unsigned char uint8_t;
 
 
 void Timer_Init(void);
+void Init_OS_ticks (void);
 void port_Init(void);
 extern volatile U32 tscount;
-extern U32 time_20ms;
-extern U32 time_20ms_old;
 void watchdog_reset(void);      //看门狗复位函数
 void SetWatchDog(void);
 void IRQ_Register(unsigned char Channel, void (*Func)(void));

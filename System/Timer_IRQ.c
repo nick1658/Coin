@@ -23,7 +23,6 @@ volatile U32 tscount=0;
 //20ms中断一次
 void Timer4_IRQ(void)
 {   
-	time_20ms++;
 	if (sys_env.tty_online_ms > 1){sys_env.tty_online_ms--;}
 	
 	if (sys_env.stop_time > 0){sys_env.stop_time--;}
@@ -39,7 +38,7 @@ void Timer4_IRQ(void)
 static void Timer4_Handler(void)
 {	
 	Timer4_Callback(); // 定时器4回调函数
-	IRQ_ClearInt(INT_TIMER4);
+	//IRQ_ClearInt(INT_TIMER4);
 }
 
 void Timer4_Start(void)
@@ -113,6 +112,7 @@ void Timer3_IRQ(void)
 			EMKICK2(STOPRUN);	
 		}
 	}
+	coin_cross_time++;
 	if(time > 0){time--;}
 }
 
@@ -121,7 +121,7 @@ void Timer3_IRQ(void)
 static void Timer3_Handler(void)
 {	
 	Timer3_Callback(); // 定时器3回调函数
-	IRQ_ClearInt(INT_TIMER3);
+	//IRQ_ClearInt(INT_TIMER3);
 }
 void Timer3_Start(void)
 {
@@ -173,13 +173,12 @@ void Timer2_IRQ(void)
 //		LED1_NOT;
 //	}
 //	SystemTick++; // 1ms/tick
-	coin_cross_time++;
 }
 
 static void Timer2_Handler(void)
 {	
 	Timer2_Callback(); // 定时器2回调函数
-	IRQ_ClearInt(INT_TIMER2);
+	//IRQ_ClearInt(INT_TIMER2);
 }
 
 void Timer2_Start(void)
@@ -227,7 +226,7 @@ void Timer1_IRQ (void)
 static void Timer1_Handler(void)
 {	
 	Timer1_Callback(); // 定时器1回调函数
-	IRQ_ClearInt(INT_TIMER1);
+	//IRQ_ClearInt(INT_TIMER1);
 }
 void Timer1_Start(void)
 {
@@ -276,11 +275,30 @@ void Timer0_IRQ (void)
 	}
 }
 
-static void Timer0_Handler(void)
+u32 is_system_ticks_handler = 0;
+
+static void Timer0_Handler(void)//在SYS模式下执行
 {	
+	OSIntEnter ();
+	is_system_ticks_handler = 1;
 	Timer0_Callback(); // 定时器0回调函数
-	IRQ_ClearInt(INT_TIMER0);
+	//IRQ_ClearInt(INT_TIMER0);
 }
+
+extern unsigned int Int_Offset;
+void is_system_ticks (void)//在SVC模式下执行
+{
+	if (is_system_ticks_handler == 1){
+		OSIntExit ();
+	}else if(rSRCPND1 & (1 << INT_TIMER0)){
+		OSIntEnter ();
+		Timer0_Callback(); // 定时器0回调函数
+		IRQ_ClearInt(INT_TIMER0);
+		OSIntExit ();
+	}
+	is_system_ticks_handler = 0;
+}
+
 void Timer0_Start(void)
 {
 	rTCON |= (0x1 << 0); // 定时器开启
@@ -315,26 +333,31 @@ void Timer0_Init(unsigned short us, void (*Callback)(void), unsigned short enabl
 	}
 }
 
+void Init_OS_ticks (void)
+{
+	Timer0_Callback = OSTimeTick;
+	Timer0_Init(1000, OSTimeTick, 1);//1ms
+	Timer0_Start ();
+}
+
 
 void Timer_Init (void)
 {
-	Timer0_Callback = timer_update;
 	Timer1_Callback = timer_update;
 	Timer2_Callback = timer_update;
 	Timer3_Callback = timer_update;
 	Timer4_Callback = timer_update;
 	
-	Timer0_Init(1000, OSTimeTick, 1);//1ms
 	//Timer1_Init(1000, OSTimeTick);//1ms
 	Timer1_Init(23000, Timer1_IRQ, 1);//1ms
-	Timer2_Init(500, Timer2_IRQ, 1);//0.5ms
+	//Timer2_Init(500, Timer2_IRQ, 1);//0.5ms
 	Timer3_Init(100, Timer3_IRQ, 1);//0.1ms
 	Timer4_Init(20000, Timer4_IRQ, 1);//20ms
+	
 	Timer4_Start ();
 	Timer3_Start ();
-	Timer2_Start ();
+	//Timer2_Start ();
 	Timer1_Start ();
-	Timer0_Start ();
 }
 
 
