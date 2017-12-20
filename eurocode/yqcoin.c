@@ -33,11 +33,11 @@ U16 coine[COINCNUM][COIN_TYPE_NUM]=     // 由币种决定
 
 void prepare_coin_cmp_value (void)
 {		
-	if (ad1_min > 20){
+	if (ad1_min > 0){
 		coin_env.cmp_use_index = 1;
-	}else if ( ad0_min > 20){
+	}else if ( ad0_min > 0){
 		coin_env.cmp_use_index = 0;
-	}else if (ad2_min > 20){
+	}else if (ad2_min > 0){
 		coin_env.cmp_use_index = 2;
 	}else{
 		coin_env.cmp_use_index = 0;
@@ -95,11 +95,11 @@ void cy_precoincount(void)
 	{
 		case 0:
 		{			
-			if ( (ch0_counttemp != ch0_count) && (ch1_counttemp != ch1_count) && (ch2_counttemp != ch2_count))	//mean there is a coin come
+			if ( (ch0_counttemp != ch0_count) )	//mean there is a coin come
 			{
 				ch0_counttemp = ch0_count;
-				ch1_counttemp = ch1_count;
-				ch2_counttemp = ch2_count;
+				//ch1_counttemp = ch1_count;
+				//ch2_counttemp = ch2_count;
 				
 				processed_coin_info.coinnumber++;
 				

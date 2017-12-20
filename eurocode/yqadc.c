@@ -473,7 +473,7 @@ void cy_ad1_valueget(void)
 		}
 		case 5://进入硬币检测
 		{						
-			if(ad1_mintemp >ad1_ad_value){
+			if(ad1_mintemp > ad1_ad_value){
 				ad1_mintemp =  ad1_ad_value;
 				coin_env.AD_min_index[1] = detect_sample_data_buf_index;
 			}
@@ -482,7 +482,6 @@ void cy_ad1_valueget(void)
 				coin_env.ad1_step = 3;
   				ad1_min = ad1_mintemp;
 				ad1_mintemp = AD1STDSET;
-				ch1_count++;    //if ch1_count != ch_counttemp ,则表示通道1采集到一枚
 				break;
 			}
  			break;
@@ -552,7 +551,6 @@ void cy_ad2_valueget(void)
 				coin_env.ad2_step	 = 3;
 				ad2_min =  ad2_mintemp;
 				ad2_mintemp = AD2STDSET;//900
-				ch2_count++;	//if ch2_count != ch_counttemp ,则表示通道2采集到一枚
 				ch0_pre_count = ch0_count;
 				break;
 			}
