@@ -320,7 +320,7 @@ void cy_ad0_valueget(void)
 				coin_cross_time = 0;//开始计时,计算硬币通过传感器的时间
 				//cy_println ("go to  coin_env.ad0_step %d", coin_env.ad0_step);
 				wave0down_flagone = 0;
-				detect_sample_data_buf_index = 0;
+				//detect_sample_data_buf_index = 0;
 				break;
 			}else/*返回步骤3采集*/
 			{	
