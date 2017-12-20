@@ -37,8 +37,8 @@ void Timer4_IRQ(void)
 }
 static void Timer4_Handler(void)
 {	
+	IRQ_ClearInt(INT_TIMER4);
 	Timer4_Callback(); // 定时器4回调函数
-	//IRQ_ClearInt(INT_TIMER4);
 }
 
 void Timer4_Start(void)
@@ -120,8 +120,8 @@ void Timer3_IRQ(void)
 
 static void Timer3_Handler(void)
 {	
+	IRQ_ClearInt(INT_TIMER3);
 	Timer3_Callback(); // 定时器3回调函数
-	//IRQ_ClearInt(INT_TIMER3);
 }
 void Timer3_Start(void)
 {
@@ -177,8 +177,8 @@ void Timer2_IRQ(void)
 
 static void Timer2_Handler(void)
 {	
+	IRQ_ClearInt(INT_TIMER2);
 	Timer2_Callback(); // 定时器2回调函数
-	//IRQ_ClearInt(INT_TIMER2);
 }
 
 void Timer2_Start(void)
@@ -225,8 +225,8 @@ void Timer1_IRQ (void)
 }
 static void Timer1_Handler(void)
 {	
+	IRQ_ClearInt(INT_TIMER1);
 	Timer1_Callback(); // 定时器1回调函数
-	//IRQ_ClearInt(INT_TIMER1);
 }
 void Timer1_Start(void)
 {
@@ -279,10 +279,10 @@ u32 is_system_ticks_handler = 0;
 
 static void Timer0_Handler(void)//在SYS模式下执行
 {	
+	IRQ_ClearInt(INT_TIMER0);
 	OSIntEnter ();
-	is_system_ticks_handler = 1;
 	Timer0_Callback(); // 定时器0回调函数
-	//IRQ_ClearInt(INT_TIMER0);
+	is_system_ticks_handler = 1;
 }
 
 extern unsigned int Int_Offset;
@@ -290,12 +290,12 @@ void is_system_ticks (void)//在SVC模式下执行
 {
 	if (is_system_ticks_handler == 1){
 		OSIntExit ();
-	}else if(rSRCPND1 & (1 << INT_TIMER0)){
+	}/*else if(rSRCPND1 & (1 << INT_TIMER0)){
 		OSIntEnter ();
 		Timer0_Callback(); // 定时器0回调函数
 		IRQ_ClearInt(INT_TIMER0);
 		OSIntExit ();
-	}
+	}*/
 	is_system_ticks_handler = 0;
 }
 
@@ -349,7 +349,7 @@ void Timer_Init (void)
 	Timer4_Callback = timer_update;
 	
 	//Timer1_Init(1000, OSTimeTick);//1ms
-	Timer1_Init(23000, Timer1_IRQ, 1);//1ms
+	Timer1_Init(23000, Timer1_IRQ, 0);//1ms
 	//Timer2_Init(500, Timer2_IRQ, 1);//0.5ms
 	Timer3_Init(100, Timer3_IRQ, 1);//0.1ms
 	Timer4_Init(20000, Timer4_IRQ, 1);//20ms

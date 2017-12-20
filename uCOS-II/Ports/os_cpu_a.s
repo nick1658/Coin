@@ -156,7 +156,7 @@ IRQ_SaveContext_os
 	;BNE		IntteruptNesting            ; 中断嵌套不用更新任务栈指针
 	
 	LDR     R0, =OSTCBCur               ; 任务被中断打断,获得打断任务TCB
-	LDR     R1, [R0]                    ; 获得打断任务栈指针
+	LDR     R1, [R0]                    ; 获得被打断任务栈指针
 	STR     SP, [R1]                    ; SP栈保存进打断任务栈指针
 	
 ;IntteruptNesting	

@@ -80,25 +80,19 @@ void IRQ_DisableInt(uint8_t Channel)
 void IRQ_Handler(void)
 {
 	unsigned int Int_Offset;
-	if (rINTPND1 != 0) 
-	{
-		// 第一组引起的中断处理	
-//		while(1);		
+	if (rINTPND1 != 0){// 第一组引起的中断处理			
 		Int_Offset = rINTOFFSET1;
-		if (IRQ_Table[Int_Offset]) 
-		{ // 中断处理需己注册
+		if (IRQ_Table[Int_Offset]){ // 中断处理需己注册
 			(IRQ_Table[Int_Offset])(); // 调用相应的中断处理
 		}
-		rSRCPND1 |= (0x01<<Int_Offset);	// write 1 to clear
-		rINTPND1 |= (0x01<<Int_Offset);	// write 1 to clear
-	} else if (rINTPND2 != 0) 
-		{
-		// 第二组引起的中断处理		
+		//rSRCPND1 |= (0x01<<Int_Offset);	// write 1 to clear
+		//rINTPND1 |= (0x01<<Int_Offset);	// write 1 to clear
+	}else if (rINTPND2 != 0) {// 第二组引起的中断处理		
 		Int_Offset = rINTOFFSET2;
-		rSRCPND2 |= (0x01<<Int_Offset);	// write 1 to clear
-		rINTPND2 |= (0x01<<Int_Offset);	// write 1 to clear
+		//rSRCPND2 |= (0x01<<Int_Offset);	// write 1 to clear
+		//rINTPND2 |= (0x01<<Int_Offset);	// write 1 to clear
 		switch (Int_Offset) 
-			{
+		{
 			case 0:
 			// INT_2D 中断处理	
 				break;
@@ -110,8 +104,8 @@ void IRQ_Handler(void)
 				break;
 			default:
 				break;
-			}
 		}
+	}
 }
 
 

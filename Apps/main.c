@@ -229,8 +229,8 @@ void Task1(void *pdata)
 	while (1) {
 		LED2_NOT;
 		OSTimeDly(1000); // LED3 1000ms…¡À∏
-		//cy_print(" OSIdleCtrRun: %ld  OSIdleCtrMax: %ld  \n", OSIdleCtrRun, OSIdleCtrMax);  
-		//cy_print(" CPU Usage: %02d%%\n",OSCPUUsage);  
+		cy_print(" OSIdleCtrRun: %ld  OSIdleCtrMax: %ld  \n", OSIdleCtrRun, OSIdleCtrMax);  
+		cy_print(" CPU Usage: %02d%%\n",OSCPUUsage);  
 		//cy_println ("***********************task 1***********************");
 	}
 }
