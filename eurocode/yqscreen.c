@@ -173,31 +173,68 @@ void disp_data(int addr1,int addr2,int addr3)     //pre picture ,specify address
 
 /////////////////////////////////////////////////////////////
 
+struct disp_count_buf{
+	U32 m_1yuan;
+	U32 m_5jiao;
+	U32 m_1jiao;
+	U32 m_5fen;
+	U32 m_2fen;
+	U32 m_1fen;
+	U32 m_10yuan;
+	U32 m_5yuan;
+	U32 total_good;
+	U32 total_ng;
+	U32 total_money;
+};
+
+struct disp_count_buf disp_buf;
+
 void disp_allcount(void)     //pre counting ,detail list 
 {
+#if OS_CRITICAL_METHOD == 3u                     /* Allocate storage for CPU status register           */
+    OS_CPU_SR  cpu_sr = 0u;
+#endif
 	if( coinchoose == CN0){
-		dgus_tf2word(ADDR_XD10,coin_num[0]);		//list 1
-		dgus_tf2word(ADDR_XD5,(coin_num[1] + coin_num[2]));					//	 list 0.5		
-		dgus_tf2word(ADDR_XD1,(coin_num[3] + coin_num[4] + coin_num[5]));	//	 list 0.1	
-		dgus_tf2word(ADDR_XD05,coin_num[6]);			//	  list 0.05
-		dgus_tf2word(ADDR_XD02,coin_num[7]);			//	  list 0.02	
-		dgus_tf2word(ADDR_XD01,coin_num[8]);			//	  list 0.01
-		dgus_tf2word(ADDR_XD1000,coin_num[9]);			//	  list 10	
-		dgus_tf2word(ADDR_XD500,coin_num[10]);			//	  list 5
-		dgus_tf2word(ADDR_XDZS,processed_coin_info.total_good);				//	  list number	
-		dgus_tf2word(ADDR_XDFG,processed_coin_info.total_ng);			//	  list forge
-		dgus_tf2word(ADDR_CPZE, processed_coin_info.total_money);	//pre worker money 
+        OS_ENTER_CRITICAL();
+		disp_buf.m_1yuan = coin_num[0];
+		disp_buf.m_5jiao = (coin_num[1] + coin_num[2]);
+		disp_buf.m_1jiao = (coin_num[3] + coin_num[4] + coin_num[5]);
+		disp_buf.m_5fen =  coin_num[6];
+		disp_buf.m_2fen =  coin_num[7];
+		disp_buf.m_1fen =  coin_num[8];
+		disp_buf.m_10yuan =  coin_num[9];
+		disp_buf.m_5yuan =  coin_num[10];
+		disp_buf.total_good = processed_coin_info.total_good;
+		disp_buf.total_ng = processed_coin_info.total_ng;
+		disp_buf.total_money = processed_coin_info.total_money;
+        OS_EXIT_CRITICAL();
 		
-		cy_print("%d,%d;", 13, coin_num[0]);
-		cy_print("%d,%d;", 14, coin_num[1]+coin_num[2]);
-		cy_print("%d,%d;", 15, coin_num[3]+coin_num[4]+coin_num[5]);
-		cy_print("%d,%d;", 16, coin_num[6]);
-		cy_print("%d,%d;",17, coin_num[7]);
-		cy_print("%d,%d;",18, coin_num[8]);
-		cy_print("%d,%d;",19, processed_coin_info.total_coin);
-		cy_print("%d,%d.%d%d;",20, (processed_coin_info.total_money/100),((processed_coin_info.total_money%100)/10),((processed_coin_info.total_money%100)%10));
-		cy_print("%d,%d;",21, processed_coin_info.total_ng);
+		dgus_tf2word(ADDR_XD10, disp_buf.m_1yuan);		//list 1
+		dgus_tf2word(ADDR_XD5, disp_buf.m_5jiao);					//	 list 0.5		
+		dgus_tf2word(ADDR_XD1, disp_buf.m_1jiao);	//	 list 0.1	
+		dgus_tf2word(ADDR_XD05, disp_buf.m_5fen);			//	  list 0.05
+		dgus_tf2word(ADDR_XD02, disp_buf.m_2fen);			//	  list 0.02	
+		dgus_tf2word(ADDR_XD01, disp_buf.m_1fen);			//	  list 0.01
+		dgus_tf2word(ADDR_XD1000, disp_buf.m_10yuan);			//	  list 10	
+		dgus_tf2word(ADDR_XD500, disp_buf.m_5yuan);			//	  list 5
+		dgus_tf2word(ADDR_XDZS,disp_buf.total_good);				//	  list number	
+		dgus_tf2word(ADDR_XDFG,disp_buf.total_ng);			//	  list forge
+		dgus_tf2word(ADDR_CPZE, disp_buf.total_money);	//pre worker money 
+		disp_allcount_to_pc ();
 	}
+}
+
+void disp_allcount_to_pc (void)
+{
+	cy_print("%d,%d;", 13, disp_buf.m_1yuan);
+	cy_print("%d,%d;", 14, disp_buf.m_5jiao);
+	cy_print("%d,%d;", 15, disp_buf.m_1jiao);
+	cy_print("%d,%d;", 16, disp_buf.m_5fen);
+	cy_print("%d,%d;",17, disp_buf.m_2fen);
+	cy_print("%d,%d;",18, disp_buf.m_1fen);
+	cy_print("%d,%d;",19, disp_buf.total_good);
+	cy_print("%d,%d.%d%d;",20, (disp_buf.total_money/100),((disp_buf.total_money%100)/10),((disp_buf.total_money%100)%10));
+	cy_print("%d,%d;",21, disp_buf.total_ng);
 }
 
 ///////////////////////////////////////////////////////////////

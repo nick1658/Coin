@@ -290,12 +290,12 @@ void is_system_ticks (void)//在SVC模式下执行
 {
 	if (is_system_ticks_handler == 1){
 		OSIntExit ();
-	}/*else if(rSRCPND1 & (1 << INT_TIMER0)){
+	}else if(rSRCPND1 & (1 << INT_TIMER0)){
+		IRQ_ClearInt(INT_TIMER0);
 		OSIntEnter ();
 		Timer0_Callback(); // 定时器0回调函数
-		IRQ_ClearInt(INT_TIMER0);
 		OSIntExit ();
-	}*/
+	}
 	is_system_ticks_handler = 0;
 }
 

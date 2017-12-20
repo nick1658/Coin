@@ -142,7 +142,7 @@ extern  s_coin_compare_value coin_cmp_value[COIN_TYPE_NUM];
 
 
 /////////////////////////////////
-#define DATA_BUF_LENGTH	32*1024
+#define DATA_BUF_LENGTH	2*1024
 #define ADJ_BUF_LENGTH 4096
 #define NG_BUF_LENGTH	4096
 #define GOOD_BUF_LENGTH	4096

@@ -158,8 +158,6 @@ void coin_init (void)
 void main_task(void)
 {
 	static unsigned int running_state = 0;
-	//i = CRC16 (iap_code_buf, sizeof(iap_code_buf));
-	//while(1)
 	running_state++;
 	if (running_state >= 1000){
 		running_state = 0;
@@ -169,31 +167,20 @@ void main_task(void)
 	switch (sys_env.workstep)
 	{
 		case 10:{        //main  proceed
-			//int t1, t2;
-			//t1 = rTCNTO1;
 			cy_ad0_valueget();    //check coin wave and get ADSAMPNUM of ad  values
 			cy_ad1_valueget();    //check coin wave and get ADSAMPNUM of ad  values
 			cy_ad2_valueget();    //check coin wave and get ADSAMPNUM of ad  values
 			//////////////////////////////////////////////////////////////////////
 			cy_precoincount();   //鉴伪、计数
 			IR_detect_func();   //第二个踢币程序
-//				t2 = rTCNTO1;
-//				if (t1 > t2){
-//					cy_println ("%d - %d = %d",t1, t2, t1 - t2);
-//				}else{
-//					cy_println ("%d ,  %d",t1, t2);
-//				}
-//				t1 = t2;
 			break;
 		}
 		case 22:{
 			cy_ad0_valueget();    //check coin wave and get ADSAMPNUM of ad  values
 			cy_ad1_valueget();    //check coin wave and get ADSAMPNUM of ad  values
 			cy_ad2_valueget();    //check coin wave and get ADSAMPNUM of ad  values
-				
+			//////////////////////////////////////////////////////////////////////
 			cy_coinlearn();   //特征学习
-			IR_detect_func();   //第二个踢币程序
-
 			break;
 		}
 		default:{
@@ -229,8 +216,9 @@ void Task1(void *pdata)
 	while (1) {
 		LED2_NOT;
 		OSTimeDly(1000); // LED3 1000ms闪烁
-		cy_print(" OSIdleCtrRun: %ld  OSIdleCtrMax: %ld  \n", OSIdleCtrRun, OSIdleCtrMax);  
-		cy_print(" CPU Usage: %02d%%\n",OSCPUUsage);  
+		//cy_print(" OSIdleCtrRun: %ld  OSIdleCtrMax: %ld  \n", OSIdleCtrRun, OSIdleCtrMax);  
+		//cy_print(" CPU Usage: %02d%%\n",OSCPUUsage);  
+		dgus_tf1word(ADDR_CPU_USAGE, OSCPUUsage);	//清分等级，暂时没有设置
 		//cy_println ("***********************task 1***********************");
 	}
 }
@@ -262,6 +250,25 @@ void TaskStart(void *pdata)
 				sys_env.workstep = 1;
 				refresh_data ();
 				cy_println ("50,stop;");//停机
+				/*
+						if (processed_coin_info.total_coin > 0){
+							LOG ("\n----------------------------------------------------------------------");
+							//LOG ("[Start At %4d-%02d-%02d %02d:%02d:%02d] ", Time.Year, Time.Month, Time.Day, Time.Hour, Time.Min, Time.Sec);
+							LOG("   type    quantity   money");
+							LOG("   1 fen      %4d     %d.%d%d",coin_num[8],((coine[coinchoose][8]*coin_num[8])/100),(((coine[coinchoose][8]*coin_num[8])%100)/10),(((coine[coinchoose][8]*coin_num[8])%100)%10));
+							LOG("   2 fen      %4d     %d.%d%d",coin_num[7],((coine[coinchoose][7]*coin_num[7])/100),(((coine[coinchoose][7]*coin_num[7])%100)/10),(((coine[coinchoose][7]*coin_num[7])%100)%10));
+							LOG("   5 fen      %4d     %d.%d%d",coin_num[6],((coine[coinchoose][6]*coin_num[6])/100),(((coine[coinchoose][6]*coin_num[6])%100)/10),(((coine[coinchoose][6]*coin_num[6])%100)%10));
+							LOG("   1 jiao     %4d     %d.%d%d",(coin_num[3]+coin_num[4]+coin_num[5]),((coine[coinchoose][3]*(coin_num[3]+coin_num[4]+coin_num[5]))/100),(((coine[coinchoose][3]*(coin_num[3]+coin_num[4]+coin_num[5]))%100)/10),(((coine[coinchoose][3]*(coin_num[3]+coin_num[4]+coin_num[5]))%100)%10));
+							LOG("   5 jiao     %4d     %d.%d%d",(coin_num[1]+coin_num[2]),((coine[coinchoose][1]*(coin_num[1]+coin_num[2]))/100),(((coine[coinchoose][1]*(coin_num[1]+coin_num[2]))%100)/10),(((coine[coinchoose][1]*(coin_num[1]+coin_num[2]))%100)%10));
+							LOG("   1 yuan     %4d     %d.%d%d",coin_num[0],((coine[coinchoose][0]*coin_num[0])/100),(((coine[coinchoose][0]*coin_num[0])%100)/10),(((coine[coinchoose][0]*coin_num[0])%100)%10));
+							LOG("");
+							LOG("   Detail:  ");
+							LOG("   NG:     %d ",processed_coin_info.total_ng);
+							LOG("   Money:     %d.%d%d",(processed_coin_info.total_money/100),((processed_coin_info.total_money%100)/10),((processed_coin_info.total_money%100)%10));
+							LOG("   Total:     %d + %d = %d",processed_coin_info.total_good, processed_coin_info.total_ng, processed_coin_info.total_coin);
+	//						LOG("   本次清分耗时: %d Sec 速度: %d / Min", ((time_20ms - (STOP_TIME * 3) - 100) / 50),
+	//													((processed_coin_info.total_coin * 3000) / (time_20ms_old - STOP_TIME * 3 - 50)));
+						}*/
 				break;
 			}
 			case 1://待机状态
@@ -309,6 +316,7 @@ void TaskStart(void *pdata)
 					SEND_ERROR(PRESSMLOCKED);
 				}
 				if (sys_env.coin_over == 1){
+					sys_env.coin_over = 0;	
 					disp_allcount ();
 				}
 				if (sys_env.stop_time == 0){
@@ -326,24 +334,6 @@ void TaskStart(void *pdata)
 	//					time_20ms_old = time_20ms;
 						comscreen(Disp_Indexpic[JSJM],Number_IndexpicB);	 // back to the  picture before alert
 						sys_env.workstep =0;	
-						if (processed_coin_info.total_coin > 0){
-							LOG ("\n----------------------------------------------------------------------");
-							//LOG ("[Start At %4d-%02d-%02d %02d:%02d:%02d] ", Time.Year, Time.Month, Time.Day, Time.Hour, Time.Min, Time.Sec);
-							LOG("   币种  数量(枚)  金额(元)");
-							LOG("   1分     %4d     %d.%d%d",coin_num[8],((coine[coinchoose][8]*coin_num[8])/100),(((coine[coinchoose][8]*coin_num[8])%100)/10),(((coine[coinchoose][8]*coin_num[8])%100)%10));
-							LOG("   2分     %4d     %d.%d%d",coin_num[7],((coine[coinchoose][7]*coin_num[7])/100),(((coine[coinchoose][7]*coin_num[7])%100)/10),(((coine[coinchoose][7]*coin_num[7])%100)%10));
-							LOG("   5分     %4d     %d.%d%d",coin_num[6],((coine[coinchoose][6]*coin_num[6])/100),(((coine[coinchoose][6]*coin_num[6])%100)/10),(((coine[coinchoose][6]*coin_num[6])%100)%10));
-							LOG("   1角     %4d     %d.%d%d",(coin_num[3]+coin_num[4]+coin_num[5]),((coine[coinchoose][3]*(coin_num[3]+coin_num[4]+coin_num[5]))/100),(((coine[coinchoose][3]*(coin_num[3]+coin_num[4]+coin_num[5]))%100)/10),(((coine[coinchoose][3]*(coin_num[3]+coin_num[4]+coin_num[5]))%100)%10));
-							LOG("   5角     %4d     %d.%d%d",(coin_num[1]+coin_num[2]),((coine[coinchoose][1]*(coin_num[1]+coin_num[2]))/100),(((coine[coinchoose][1]*(coin_num[1]+coin_num[2]))%100)/10),(((coine[coinchoose][1]*(coin_num[1]+coin_num[2]))%100)%10));
-							LOG("   1元     %4d     %d.%d%d",coin_num[0],((coine[coinchoose][0]*coin_num[0])/100),(((coine[coinchoose][0]*coin_num[0])%100)/10),(((coine[coinchoose][0]*coin_num[0])%100)%10));
-							LOG("");
-							LOG("   详细信息:  ");
-							LOG("   异币:     %d 枚",processed_coin_info.total_ng);
-							LOG("   金额:     %d.%d%d 元",(processed_coin_info.total_money/100),((processed_coin_info.total_money%100)/10),((processed_coin_info.total_money%100)%10));
-							LOG("   总数:     %d + %d = %d 枚",processed_coin_info.total_good, processed_coin_info.total_ng, processed_coin_info.total_coin);
-	//						LOG("   本次清分耗时: %d Sec 速度: %d / Min", ((time_20ms - (STOP_TIME * 3) - 100) / 50),
-	//													((processed_coin_info.total_coin * 3000) / (time_20ms_old - STOP_TIME * 3 - 50)));
-						}
 					}
 				}
 				break;
@@ -366,6 +356,7 @@ void TaskStart(void *pdata)
 			case 22:{
 				runfunction();	 //转盘动作函数
 				if (sys_env.coin_over == 1){
+					sys_env.coin_over = 0;	
 					dgus_tf1word(ADDR_A0MA,coin_maxvalue0);	//	 real time ,pre AD0  max
 					dgus_tf1word(ADDR_A0MI,coin_minvalue0);	//	 real time ,pre AD0  min
 					dgus_tf1word(ADDR_A1MA,coin_maxvalue1);	//	 real time ,pre AD1  max	

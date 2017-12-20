@@ -27,9 +27,9 @@ void counter_clear (void); //
 
 /////////////////变量/////////////////////////
 
-#define	ADDR_CPFG 	0x0004 	 // 数据变量显示  计数界面 异币
 #define	ADDR_CPZE 	0x0000 	 // 数据变量显示 计数界面 金额
 #define	ADDR_CPZS 	0x0002 	 // 数据变量显示   计数界面 数量
+#define	ADDR_CPFG 	0x0004 	 // 数据变量显示  计数界面 异币
 
 #define ADDR_CRUN    0x06  	 // 按键值返回 计数界面  启动按钮 
 #define ADDR_PGH	0x0007   // 数据变量显示  工号
@@ -165,6 +165,8 @@ void counter_clear (void); //
 #define ADDR_LEVEL1000 	0x206   // 10元硬币的清分等级设置
 #define ADDR_LEVEL500 	0x207   // 5元硬币的清分等级设置
 
+#define ADDR_CPU_USAGE 0x300
+
 //报错 函数  
 #define ALERT_MSG(TIPS,MSG) { \
 	dgus_tfbeep(TIMEBP2); \
@@ -216,6 +218,7 @@ extern volatile U8 touchnum[TSGET_NUM];
 extern volatile S32 db_id;   //历史数据 表格已经显示 数
 void touchresult(void); 	 //manage the instruct from dgus
 void  disp_allcount(void);	  // 取出界面 显示	 当前计数  详单
+void disp_allcount_to_pc (void);
 
 
 #define PRECOIN0  0   //用于   预置计数	 

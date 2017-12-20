@@ -76,21 +76,21 @@ typedef struct
 
 typedef struct
 {
-	S16 print_wave_to_pc;
-	S16 auto_stop;
-	S16 auto_clear;
-	S16 sim_count_flag;
-	S16 save_ng_data;
-	S16 save_good_data;
+	U32 print_wave_to_pc;
+	U32 auto_stop;
+	U32 auto_clear;
+	U32 sim_count_flag;
+	U32 save_ng_data;
+	U32 save_good_data;
 	
-	S16 country_index;
-	S16 coin_index;
-	S16 workstep;
-	S16 uart0_cmd_flag;
-	S16 tty_mode;
-	S16 hmi_debug_flag;
-	U16 stop_time;
-	U16 stop_flag;
+	U32 country_index;
+	U32 coin_index;
+	U32 workstep;
+	U32 uart0_cmd_flag;
+	U32 tty_mode;
+	U32 hmi_debug_flag;
+	U32 stop_time;
+	U32 stop_flag;
 	U32 coin_cross_time;
 	U32 tty_online_ms;
 	U32 coin_over;

@@ -295,107 +295,124 @@ void cy_ad0_valueget(void)
 			}*/
 			if( (ad0_ad_value < coin_env.std_down_value0)){  //std_value	standard value for detect  从平均值的监测改为当前值的监测
 				wave0down_flagone++;    //小于参考值  则表示有硬币过来
-			}
-			/*均值大于参考值时*/
-			else if((ad0_ad_value > coin_env.std_down_value0)){
+			}else{// if((ad0_ad_value >= coin_env.std_down_value0)){/*均值大于等于参考值时*/
 				wave0down_flagone = 0;
+				detect_sample_data_buf_index = 0;	
 			}
 			/*采样值小于参考值,持续性WAVEUP0次以上（消抖处理）*/	
 			if(  wave0down_flagone > WAVEUP0){     //WAVEUP0 4
-				coin_env.ad0_step  = 9;
+				//coin_env.ad0_step  = 9;
 				coin_cross_time = 0;//开始计时,计算硬币通过传感器的时间
 				wave0down_flagone = 0;
-				detect_sample_data_buf_index = 0;
-			}else{
-				detect_sample_data_buf_index = 0;					
+				
+				ad0_mintemp = ad0_ad_value;
+				ch0_coin_come++;  //通道 0 检测到来硬币  通知其它通道开始采样
+				coin_env.ad0_step  = 10;
+				
 			}
 			break;
 		} 
 /*波谷保持,假设最小值*/
-		case 9:   ///此处不能去掉，因为双峰会跳到这里
-		{
-			ad0_mintemp = ad0_ad_value;
-			ch0_coin_come++;  //通道 0 检测到来硬币  通知其它通道开始采样
-			coin_env.ad0_step  = 10;
-			break;
-		}
+//		case 9:   ///此处不能去掉，因为双峰会跳到这里
+//		{
+//			ad0_mintemp = ad0_ad_value;
+//			ch0_coin_come++;  //通道 0 检测到来硬币  通知其它通道开始采样
+//			coin_env.ad0_step  = 10;
+//			break;
+//		}
 /*再次求和均值*/
 		case 10:						//ad0 value get
 		{
 			AD_Sample_All ();
-			coin_env.ad0_step = 16;
-			break;
-		}
+//			coin_env.ad0_step = 16;
+//			break;
+//		}
 /*确定最小值,波形回升*/
-		case 16:						//read in ad value ADSAMPNUM times 
-		{
-			//step9 ad0_mintemp 假定最小值
-			if( ad0_mintemp > ad0_ad_value ){  //波形持续下降中此处使用的 比较参数非常重要，原来是ad0_ad_value_buf[ad0_samp_number] 试一下ad0_ad_value
-				ad0_mintemp =ad0_ad_value;	//交换最小值
+//		case 16:						//read in ad value ADSAMPNUM times 
+//		{
+//			step9 ad0_mintemp 假定最小值
+			if( ad0_ad_value < ad0_mintemp ){  //波形持续下降中此处使用的 比较参数非常重要，原来是ad0_ad_value_buf[ad0_samp_number] 试一下ad0_ad_value
+				ad0_mintemp = ad0_ad_value;	//交换最小值
 				coin_env.AD_min_index[0] = detect_sample_data_buf_index;
 				wave0up_flagone = 0;
 			}else if((ad0_ad_value > ad0_mintemp )&&((ad0_ad_value - ad0_mintemp ) > WAVE_UP_VALUE)){    //波形    回升  
 				wave0up_flagone++;
+			}else{ 
+				wave0up_flagone = 0;
 			}
 			/*持续性WAVEMAX0次,波形回升*/
 			if( wave0up_flagone  > WAVEMAX0){     //确认波形峰值
-				coin_env.ad0_step = 19;	
+				//coin_env.ad0_step = 19;	
 				wave0up_flagone = 0;
-			}else{/*返回step10 采样均值步骤*/
-				coin_env.ad0_step = 10;
-			}
+					
+				ad0_min = ad0_mintemp;
+				ad0_mintemp = AD0STDSET;//900
+				ch0_count++;    //if ch0_count != ch_counttemp ,则表示通道0采集到一枚
+				ad0_maxtemp = ad0_ad_value ;//ad0_ad_value求和均值
+				coin_env.ad0_step = 25; ///25
+				
+			}//else{/*返回step10 采样均值步骤*/
+			//	coin_env.ad0_step = 10;
+			//}
 			break;
 		}
 /*已经确认最小值，肯定有经过一枚硬币，假设最大值*/
-		case 19:				
-		{
-			ad0_min = ad0_mintemp;
-			ch0_count++;    //if ch0_count != ch_counttemp ,则表示通道0采集到一枚
-			ad0_maxtemp = ad0_ad_value ;//ad0_ad_value求和均值
-			coin_env.ad0_step = 25; ///25
-			break;
-		}	
+//		case 19:				
+//		{
+//			ad0_min = ad0_mintemp;
+//			ch0_count++;    //if ch0_count != ch_counttemp ,则表示通道0采集到一枚
+//			ad0_maxtemp = ad0_ad_value ;//ad0_ad_value求和均值
+//			coin_env.ad0_step = 25; ///25
+//			break;
+//		}	
 /*读取AD转换值,跟均值*/
 		case 25:						//read in ad value ADSAMPNUM times 
 		{
 			AD_Sample_All ();
-			coin_env.ad0_step = 31; //
-			break;
-		}
+//			coin_env.ad0_step = 31; //
+//			break;
+//		}
 /*判断是否跟参考值相同或相近,确定最大采样值,波形恢复到参考值*/
-		case 31:						//ad0 value get
-		{
+//		case 31:						//ad0 value get
+//		{
 			/*均值大于参考值,表示一枚已经过去*/
 			if( (ad0_ad_value >= coin_env.std_up_value0) ){    //如果 波形恢复到参考值，表示一枚结束
 				wave0up_flag++;
 				wave0down_flagtwo = 0;
 				ad0_maxtemp = ad0_ad_value ;
-			}else if( (ad0_ad_value < coin_env.std_down_value0)&&(ad0_maxtemp > ad0_ad_value)&&((ad0_maxtemp-ad0_ad_value) > WAVE_COIN_TWO_DOWN_VALUE) ){ 
+			}else if( 	(ad0_ad_value < coin_env.std_down_value0) && 
+						(ad0_ad_value < ad0_maxtemp) && 
+						((ad0_maxtemp - ad0_ad_value) > WAVE_COIN_TWO_DOWN_VALUE) ){ 
 				wave0down_flagtwo++;//考虑连币情况,连币时，波谷过去后还没恢复到参考值还会再来一个波谷,
+				wave0up_flag = 0;
 			}else if(ad0_ad_value >= ad0_maxtemp){/*如果波形还在上升，更新确定最大值*/		
 				wave0down_flagtwo = 0;
+				wave0up_flag = 0;
 				ad0_maxtemp = ad0_ad_value ;
 			}
 					
 			/*已经恢复参考值,返回初始测量*/
 			if( wave0up_flag > WAVE0fall){// WAVE0fall 2
 				coin_env.ad0_step = 3; //
-				sys_env.coin_cross_time = coin_cross_time;//硬币出来了，这里统计连币经过的时间
+				sys_env.coin_cross_time = coin_cross_time;//硬币出来了，这里统计硬币经过的时间
 				blockflag = ADBLOCKT;      //堵币时间复位
 				wave0up_flag =0;
 				wave0down_flagtwo = 0;	
 				break;
 			}
-			/*连币双波谷,返回状态9*/
+			/*连币双波谷,返回状态10*/
 			if( (wave0down_flagtwo > WAVEUPT0)) {    //表示双峰来临 WAVEUPT0 8
-				coin_env.ad0_step = 9;
+				coin_env.ad0_step = 10;
 				blockflag = ADBLOCKT;      //使用鉴伪传感器 报堵币 5
 				wave0up_flag =0;
 				wave0down_flagtwo = 0;	
+				sys_env.coin_cross_time = coin_cross_time;//硬币出来了，这里统计硬币经过的时间
+				coin_cross_time = 0;
+				ch0_coin_come++;  //通道 0 检测到连币  通知其它通道开始采样
 				break;
-			}else{/*即没有恢复也没有连币则继续测量*/
-				coin_env.ad0_step = 25;	
-			}								
+			}//else{/*即没有恢复也没有连币则继续测量*/
+			//	coin_env.ad0_step = 25;	
+			//}								
 			break;
 		}
 	}
@@ -534,12 +551,9 @@ void cy_ad2_valueget(void)
 			if((ch0_pre_count != ch0_count)){
 				coin_env.ad2_step	 = 3;
 				ad2_min =  ad2_mintemp;
-				ch2_count++;	//if ch2_count != ch_counttemp ,则表示通道2采集到一枚
 				ad2_mintemp = AD2STDSET;//900
+				ch2_count++;	//if ch2_count != ch_counttemp ,则表示通道2采集到一枚
 				ch0_pre_count = ch0_count;
-				if (sys_env.print_wave_to_pc == 0){
-					detect_sample_data_buf_index = 0;
-				}
 				break;
 			}
 			break;
