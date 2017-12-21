@@ -105,7 +105,25 @@ CPU_SR_Save
 CPU_SR_Restore		
 	MSR     CPSR_c, R0
 	BX  	LR
-		
+
+
+	EXPORT  System_call
+System_call
+	SWI		12
+	BX  	LR
+	
+	IMPORT SWI_Handler
+	EXPORT  SWI_IRQ
+SWI_IRQ
+	STMFD	SP!, {R1-R12,  LR}
+	LDR 	R4, [LR, #-4]                                   ; LR - 4 为指令" swi xxx" 的地址，低
+	BIC   	R4, R4, #0xFF000000                    ; 取得ARM指令24位立即数
+    LDR     R2, =SWI_Handler
+	MOV		LR, PC 
+	BX		R2
+	ADD		R0, R0, R4
+	LDMIA     SP!, {R1-R12, PC}^  
+	
 ;****************************************************************************************
 ;   IRQ处理
 ; 其它异常均应类型时行上下文保存处理

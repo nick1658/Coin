@@ -81,10 +81,6 @@ volatile U32 adtime = 0;    //定时中断里 计时
  U16 ad1_ad_value= 0;	//ad value sample  ADSAMPNUM times 
  U16 ad1_mintemp = 0;// = AD1STDVALUE;		//作为 与ad1_ad_value 值进行比较的值，为了取得波形最高值
  U16 ad1_maxtemp = 0;   //波形恢复  参考比较值
- U16 wave1down_flagone = 0;
- U16 wave1up_flagone = 0;    //波形上升 参考比较值
- U16 wave1up_flagtwo = 0;
- U16 wave1down_flagtwo = 0;   //双峰时，用于判断第二个峰
  U32 ch1_count =0;  //通道1 通过的硬币计数 
  U16 ad1_min = 0;     //贮存每枚硬币过去后的 最大值
  U32 ch1_coin_come =0;  //通道0 来硬币 标记
@@ -137,7 +133,7 @@ void AD_Sample_All (void)
 	/*coin_env.ad0_averaged_value 求和*/
 	coin_env.ad0_averaged_value += ad0_ad_value_buf[ad0_samp_number];//coin_env.ad0_averaged_value 均值后的数				
 	ad0_ad_value = (coin_env.ad0_averaged_value)/ADSAMPNUM0;   //求当前数组总和后求平均值
-	Detect_AD_Value_buf[detect_sample_data_buf_index].AD0 = ad0_ad_value; // save ad to buffer
+	Detect_AD_Value_buf_p[detect_sample_data_buf_index].AD0 = ad0_ad_value; // save ad to buffer
 	ad0_samp_number++;
 	if( (ad0_samp_number > (ADSAMPNUM0-1)) ){   //如果采集够了ADSAMPNUM个数据10
 		ad0_samp_number = 0;
@@ -162,7 +158,7 @@ void AD_Sample_All (void)
 	/*coin_env.ad1_averaged_value 求和数*/
 	coin_env.ad1_averaged_value += ad1_ad_value_buf[ad1_samp_number];//coin_env.ad1_averaged_value 均值后的数				
 	ad1_ad_value = (coin_env.ad1_averaged_value)/ADSAMPNUM0;   //求当前数组总和后求平均值
-	Detect_AD_Value_buf[detect_sample_data_buf_index].AD1 = ad1_ad_value; // save ad to buffer
+	Detect_AD_Value_buf_p[detect_sample_data_buf_index].AD1 = ad1_ad_value; // save ad to buffer
 	ad1_samp_number++;
 	if( (ad1_samp_number > (ADSAMPNUM0-1)) ){   //如果采集够了ADSAMPNUM个数据10
 		ad1_samp_number = 0;
@@ -181,7 +177,7 @@ void AD_Sample_All (void)
 	/*coin_env.ad2_averaged_value 求和数*/
 	coin_env.ad2_averaged_value += ad2_ad_value_buf[ad2_samp_number];//coin_env.ad2_averaged_value 均值后的数				
 	ad2_ad_value = (coin_env.ad2_averaged_value)/ADSAMPNUM0;   //求当前数组总和后求平均值
-	Detect_AD_Value_buf[detect_sample_data_buf_index].AD2 = ad2_ad_value; // save ad to buffer
+	Detect_AD_Value_buf_p[detect_sample_data_buf_index].AD2 = ad2_ad_value; // save ad to buffer
 	ad2_samp_number++;
 	if( (ad2_samp_number > (ADSAMPNUM0-1)) ){   //如果采集够了ADSAMPNUM个数据10
 		ad2_samp_number = 0;
@@ -225,6 +221,8 @@ void cy_ad0_valueget(void)
 			
 			blockflag = ADBLOCKT;	   //使用鉴伪传感器 报堵币 堵币时间5
 			coin_env.ad0_step = 2;
+			sys_env.AD_buf_index = 0;
+			Detect_AD_Value_buf_p = Detect_AD_Value_buf[sys_env.AD_buf_index];
 			break;
 		}
 		/*读取通道0,ad0_ad_value采样10次作为均值*/
@@ -247,52 +245,6 @@ void cy_ad0_valueget(void)
 		{
 			AD_Sample_All ();
 			blockflag = ADBLOCKT;	   //使用鉴伪传感器 报堵币
-			/* 
-			if ((detect_sample_data_buf_index) > para_set_value.data.adj_offset_position){
-				detect_sample_data_buf_index -= 3000;
-//					cy_print("%d	%d	%d	\n",
-//								Detect_AD_Value_buf[detect_sample_data_buf_index].AD0, 
-//								Detect_AD_Value_buf[detect_sample_data_buf_index].AD1,
-//								Detect_AD_Value_buf[detect_sample_data_buf_index].AD2);
-				for (is = 0; is < COIN_TYPE_NUM; is++){ //补偿值
-					std0_offset = Detect_AD_Value_buf[detect_sample_data_buf_index].AD0 - pre_value.country[coinchoose].coin[is].data.std0;
-					std1_offset = Detect_AD_Value_buf[detect_sample_data_buf_index].AD1 - pre_value.country[coinchoose].coin[is].data.std1;
-					std2_offset = Detect_AD_Value_buf[detect_sample_data_buf_index].AD2 - pre_value.country[coinchoose].coin[is].data.std2;
-				#ifdef SAMPLE_METHOD_0
-					coin_cmp_value[is].compare_max0 = (pre_value.country[coinchoose].coin[is].data.max0 + pre_value.country[coinchoose].coin[is].data.offsetmax0 + 
-													  std0_offset);
-					coin_cmp_value[is].compare_min0 = (pre_value.country[coinchoose].coin[is].data.min0 + pre_value.country[coinchoose].coin[is].data.offsetmin0 + 
-													  std0_offset);
-					
-					coin_cmp_value[is].compare_max1 = (pre_value.country[coinchoose].coin[is].data.max1 + pre_value.country[coinchoose].coin[is].data.offsetmax1 + 
-													  std1_offset - std0_offset);
-					coin_cmp_value[is].compare_min1 = (pre_value.country[coinchoose].coin[is].data.min1 + pre_value.country[coinchoose].coin[is].data.offsetmin1 + 
-													  std1_offset - std0_offset);
-					
-					coin_cmp_value[is].compare_max2 = (pre_value.country[coinchoose].coin[is].data.max2 + pre_value.country[coinchoose].coin[is].data.offsetmax2 + 
-													  std2_offset - std1_offset);
-					coin_cmp_value[is].compare_min2 = (pre_value.country[coinchoose].coin[is].data.min2 + pre_value.country[coinchoose].coin[is].data.offsetmin2 + 
-													  std2_offset - std1_offset);
-				#endif
-				#ifdef SAMPLE_METHOD_1
-					coin_cmp_value[is].compare_max0 = (pre_value.country[coinchoose].coin[is].data.max0 + pre_value.country[coinchoose].coin[is].data.offsetmax0 + 
-													  std0_offset);
-					coin_cmp_value[is].compare_min0 = (pre_value.country[coinchoose].coin[is].data.min0 + pre_value.country[coinchoose].coin[is].data.offsetmin0 + 
-													  std0_offset);
-					
-					coin_cmp_value[is].compare_max1 = (pre_value.country[coinchoose].coin[is].data.max1 + pre_value.country[coinchoose].coin[is].data.offsetmax1 + 
-													  std1_offset);
-					coin_cmp_value[is].compare_min1 = (pre_value.country[coinchoose].coin[is].data.min1 + pre_value.country[coinchoose].coin[is].data.offsetmin1 + 
-													  std1_offset);
-					
-					coin_cmp_value[is].compare_max2 = (pre_value.country[coinchoose].coin[is].data.max2 + pre_value.country[coinchoose].coin[is].data.offsetmax2 + 
-													  std2_offset);
-					coin_cmp_value[is].compare_min2 = (pre_value.country[coinchoose].coin[is].data.min2 + pre_value.country[coinchoose].coin[is].data.offsetmin2 + 
-													  std2_offset);
-				#endif
-				}
-				detect_sample_data_buf_index = 0;
-			}*/
 			if( (ad0_ad_value < coin_env.std_down_value0)){  //std_value	standard value for detect  从平均值的监测改为当前值的监测
 				wave0down_flagone++;    //小于参考值  则表示有硬币过来
 			}else{// if((ad0_ad_value >= coin_env.std_down_value0)){/*均值大于等于参考值时*/
@@ -395,6 +347,8 @@ void cy_ad0_valueget(void)
 			if( wave0up_flag > WAVE0fall){// WAVE0fall 2
 				coin_env.ad0_step = 3; //
 				sys_env.coin_cross_time = coin_cross_time;//硬币出来了，这里统计硬币经过的时间
+				sys_env.coin_leave = 1;
+				sys_env.AD_data_len = detect_sample_data_buf_index;
 				blockflag = ADBLOCKT;      //堵币时间复位
 				wave0up_flag =0;
 				wave0down_flagtwo = 0;	
@@ -408,6 +362,7 @@ void cy_ad0_valueget(void)
 				wave0down_flagtwo = 0;	
 				sys_env.coin_cross_time = coin_cross_time;//硬币出来了，这里统计硬币经过的时间
 				coin_cross_time = 0;
+				ad0_mintemp = ad0_ad_value;
 				ch0_coin_come++;  //通道 0 检测到连币  通知其它通道开始采样
 				break;
 			}//else{/*即没有恢复也没有连币则继续测量*/
@@ -432,9 +387,6 @@ void cy_ad1_valueget(void)
 			ch1_count = 0;
 			ch1_counttemp = ch1_count;
 			ch1_coin_come = ch0_coin_come;
-			wave1down_flagone = 0;
-			wave1up_flagone =0;
-			wave1down_flagtwo =0;
 			ad1_ad_value = AD1STDSET;
 			ad1_mintemp = AD1STDSET;
 			ad1_min = AD1STDSET;
@@ -771,14 +723,12 @@ U16 adstd_offset()    //  检测 基准值   有不大偏差进行补偿
 
 
 volatile U32 start_sample = 0;
-static		U16  minTempAD0 = 1000;
-static		U16  minTempAD1 = 1000;
-static		U16  minTempAD2 = 1000;
 
 
 
-volatile AD_Value AD_Value_buf[DATA_BUF_LENGTH];
-volatile AD_Value Detect_AD_Value_buf[DATA_BUF_LENGTH];
+AD_Value AD_Value_buf[DATA_BUF_LENGTH];
+AD_Value Detect_AD_Value_buf[AD_BUF_GROUP_LEN][DATA_BUF_LENGTH];
+AD_Value *Detect_AD_Value_buf_p;
 //volatile AD_Value Adj_AD_Value_buf[ADJ_BUF_LENGTH];
 volatile AD_Value NG_value_buf[NG_BUF_LENGTH];
 volatile AD_Value GOOD_value_buf[NG_BUF_LENGTH];
@@ -791,104 +741,50 @@ volatile U32 detect_sample_data_buf_index = 0;
 
 extern void Uart_SendByte(int data);
 
-int L_H_min = 1024;
-int L_M_min = 1024;
-int M_H_min = 1024;
-	
-int L_H_max = 0;
-int L_M_max = 0;
-int M_H_max = 0;
-
-void send_sample_data (volatile AD_Value ad_value_buf[DATA_BUF_LENGTH], int counter)
+void send_sample_data (AD_Value ad_value_buf[DATA_BUF_LENGTH], int counter)
 {
+	U16  minTempAD0 = 1000;
+	U16  minTempAD1 = 1000;
+	U16  minTempAD2 = 1000;
 	int i = 0;
-	int L_H_Temp = 0;
-	int L_M_Temp = 0;
-	int M_H_Temp = 0;
-	
 	int H_min_index = 0;
 	int M_min_index = 0;
 	int L_min_index = 0;
-	//if (start_sample)
-	{
-		cy_print ("start\n");
-		for (i = 0; i < counter; i++)
-		{
-			if (minTempAD0 > ad_value_buf[i].AD0)
-			{
-				minTempAD0 = ad_value_buf[i].AD0;
-				H_min_index = i;
-			}
-			if (minTempAD1 > ad_value_buf[i].AD1)
-			{
-				minTempAD1 = ad_value_buf[i].AD1;
-				M_min_index = i;
-			}
-			if (minTempAD2 > ad_value_buf[i].AD2)
-			{
-				minTempAD2 = ad_value_buf[i].AD2;
-				L_min_index = i;
-			}
-			cy_print("%d	%d	%d	\n",ad_value_buf[i].AD0, ad_value_buf[i].AD1, ad_value_buf[i].AD2);
+	
+	cy_print ("start\n");
+	for (i = 0; i < counter; i++){
+		if (minTempAD0 > ad_value_buf[i].AD0){
+			minTempAD0 = ad_value_buf[i].AD0;
+			H_min_index = i;
 		}
-		
-		cy_print ("end\n");
-		dgus_tf1word(ADDR_STDH, (minTempAD0)); //	high frequence
-		dgus_tf1word(ADDR_STDM,  minTempAD1); //	middle frequence
-		dgus_tf1word(ADDR_STDL, (minTempAD2)); //	low frequence	
-//		dgus_tf1word(ADDR_STDT,((std_ad3*3300)/1024-600)); //	low frequence	
-		
-		
-		if ( minTempAD1 > 20)
-		{
-			L_H_Temp = ad_value_buf[H_min_index].AD2 - ad_value_buf[H_min_index].AD0;
-			L_M_Temp = ad_value_buf[H_min_index].AD2 - ad_value_buf[H_min_index].AD1;
-			M_H_Temp = ad_value_buf[H_min_index].AD1 - ad_value_buf[H_min_index].AD0;
+		if (minTempAD1 > ad_value_buf[i].AD1){
+			minTempAD1 = ad_value_buf[i].AD1;
+			M_min_index = i;
 		}
-		else if (minTempAD0 >20)
-		{
-			L_H_Temp = ad_value_buf[M_min_index].AD2 - ad_value_buf[M_min_index].AD0;
-			L_M_Temp = ad_value_buf[M_min_index].AD2 - ad_value_buf[M_min_index].AD1;
-			M_H_Temp = ad_value_buf[M_min_index].AD1 - ad_value_buf[M_min_index].AD0;
+		if (minTempAD2 > ad_value_buf[i].AD2){
+			minTempAD2 = ad_value_buf[i].AD2;
+			L_min_index = i;
 		}
-		else
-		{
-			L_H_Temp = ad_value_buf[L_min_index].AD2 - ad_value_buf[L_min_index].AD0;
-			L_M_Temp = ad_value_buf[L_min_index].AD2 - ad_value_buf[L_min_index].AD1;
-			M_H_Temp = ad_value_buf[L_min_index].AD1 - ad_value_buf[L_min_index].AD0;
-		}
-		
-		if (L_H_Temp < L_H_min)
-		{
-			L_H_min = L_H_Temp;
-		}
-		if (L_H_Temp > L_H_max)
-		{
-			L_H_max = L_H_Temp;
-		}
-		
-		if (L_M_Temp < L_M_min)
-		{
-			L_M_min = L_M_Temp;
-		}
-		if (L_M_Temp > L_M_max)
-		{
-			L_M_max = L_M_Temp;
-		}
-		
-		if (M_H_Temp < M_H_min)
-		{
-			M_H_min = M_H_Temp;
-		}
-		if (M_H_Temp > M_H_max)
-		{
-			M_H_max = M_H_Temp;
-		}
-		
-		minTempAD0 = 1024;
-		minTempAD1 = 1024;
-		minTempAD2 = 1024;
+		cy_print("%d	%d	%d	\n",ad_value_buf[i].AD0, ad_value_buf[i].AD1, ad_value_buf[i].AD2);
 	}
+	cy_print ("end\n");
+	
+	if ( minTempAD0 > 0){
+		minTempAD0 = ad_value_buf[H_min_index].AD0;
+		minTempAD1 = ad_value_buf[H_min_index].AD1;
+		minTempAD2 = ad_value_buf[H_min_index].AD2;
+	}else if (minTempAD1 > 0){
+		minTempAD0 = ad_value_buf[M_min_index].AD0;
+		minTempAD1 = ad_value_buf[M_min_index].AD1;
+		minTempAD2 = ad_value_buf[M_min_index].AD2;
+	}else{
+		minTempAD0 = ad_value_buf[L_min_index].AD0;
+		minTempAD1 = ad_value_buf[L_min_index].AD1;
+		minTempAD2 = ad_value_buf[L_min_index].AD2;
+	}
+	dgus_tf1word(ADDR_STDH, (minTempAD0)); //	high frequence
+	dgus_tf1word(ADDR_STDM,  minTempAD1); //	middle frequence
+	dgus_tf1word(ADDR_STDL, (minTempAD2)); //	low frequence	
 }
 U16 adstd_sample(void)    //基准值调试  
 {

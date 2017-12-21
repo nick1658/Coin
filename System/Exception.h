@@ -74,7 +74,7 @@ extern "C" {
 #define SUBINT_RXD0		(0)
 	
 extern void Undef_Handler(void);
-extern void SWI_Handler(void);
+extern unsigned int SWI_Handler(unsigned int p);
 extern void PAbt_Handler(void);
 extern void DAbt_Handler(void);
 extern void IRQ_Handler(void);

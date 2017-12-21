@@ -93,10 +93,11 @@ Vectors     B       Reset_Handler
 			IMPORT	DAbt_Handler
 			IMPORT	IRQ_SaveContext_os
 			IMPORT	FIQ_Handler	
-			IMPORT  IRQ_Handler			
+			IMPORT  IRQ_Handler	
+			IMPORT  SWI_IRQ			
 Reset_Addr  DCD   Reset_Handler
 Undef_Addr  DCD   Undef_Handler
-SWI_Addr    DCD   SWI_Handler
+SWI_Addr    DCD   SWI_IRQ
 PAbt_Addr   DCD   PAbt_Handler
 DAbt_Addr   DCD   DAbt_Handler
 Notuse_Addr DCD   0           ; Reserved Address 
@@ -128,7 +129,7 @@ Reset_Handler
 ; 看门狗关闭
 		LDR     R0, =WT_BASE 
 		LDR     R1, =0
-		STR     R1, [R0]		
+		STR     R1, [R0]	
 
 ;/***********************************************************************/
 ; 关闭所有外设中断

@@ -43,15 +43,22 @@ void prepare_coin_cmp_value (void)
 		coin_env.cmp_use_index = 0;
 	}	
 #ifdef SAMPLE_METHOD_0
-	coin_value0 = Detect_AD_Value_buf[coin_env.AD_min_index[coin_env.cmp_use_index]].AD0;
-	coin_value1 = Detect_AD_Value_buf[coin_env.AD_min_index[coin_env.cmp_use_index]].AD1 - coin_value0;
-	coin_value2 = Detect_AD_Value_buf[coin_env.AD_min_index[coin_env.cmp_use_index]].AD2 - Detect_AD_Value_buf[coin_env.AD_min_index[coin_env.cmp_use_index]].AD1;
+	coin_value0 = Detect_AD_Value_buf_p[coin_env.AD_min_index[coin_env.cmp_use_index]].AD0;
+	coin_value1 = Detect_AD_Value_buf_p[coin_env.AD_min_index[coin_env.cmp_use_index]].AD1 - coin_value0;
+	coin_value2 = Detect_AD_Value_buf_p[coin_env.AD_min_index[coin_env.cmp_use_index]].AD2 - Detect_AD_Value_buf_p[coin_env.AD_min_index[coin_env.cmp_use_index]].AD1;
 #endif
 #ifdef SAMPLE_METHOD_1
-	coin_value0 = Detect_AD_Value_buf[coin_env.AD_min_index[coin_env.cmp_use_index]].AD0;
-	coin_value1 = Detect_AD_Value_buf[coin_env.AD_min_index[coin_env.cmp_use_index]].AD1;
-	coin_value2 = Detect_AD_Value_buf[coin_env.AD_min_index[coin_env.cmp_use_index]].AD2;
+	coin_value0 = Detect_AD_Value_buf_p[coin_env.AD_min_index[coin_env.cmp_use_index]].AD0;
+	coin_value1 = Detect_AD_Value_buf_p[coin_env.AD_min_index[coin_env.cmp_use_index]].AD1;
+	coin_value2 = Detect_AD_Value_buf_p[coin_env.AD_min_index[coin_env.cmp_use_index]].AD2;
 #endif
+	if (sys_env.AD_buf_sending == 0){
+		sys_env.AD_buf_sending = 1;
+		sys_env.Detect_AD_buf_p = Detect_AD_Value_buf_p;
+		sys_env.AD_buf_index++;
+		sys_env.AD_buf_index %= AD_BUF_GROUP_LEN;
+		Detect_AD_Value_buf_p = Detect_AD_Value_buf[sys_env.AD_buf_index];
+	}
 }
 
 S16 is_good_coin (void)

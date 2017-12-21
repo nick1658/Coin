@@ -94,6 +94,11 @@ typedef struct
 	U32 coin_cross_time;
 	U32 tty_online_ms;
 	U32 coin_over;
+	U32 coin_leave;
+	U32 AD_data_len;
+	U32 AD_buf_index;
+	U32 AD_buf_sending;
+	AD_Value *Detect_AD_buf_p;
 }s_system_env;
 
 extern s_system_env sys_env;

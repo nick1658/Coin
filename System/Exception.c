@@ -13,12 +13,13 @@ void Undef_Handler(void)
 	}
 }
 
-void SWI_Handler(void)
+unsigned int SWI_Handler(unsigned int p)
 {
 //	LOG ("SWI_Handler");
-	while(1) {
+//	while(1) {
 
-	}
+//	}
+	return p+1;
 }
 
 void PAbt_Handler(void)

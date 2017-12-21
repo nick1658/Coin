@@ -183,6 +183,12 @@ void main_task(void)
 			cy_coinlearn();   //特征学习
 			break;
 		}
+		case 103:{
+			cy_ad0_valueget();    //check coin wave and get ADSAMPNUM of ad  values
+			cy_ad1_valueget();    //check coin wave and get ADSAMPNUM of ad  values
+			cy_ad2_valueget();    //check coin wave and get ADSAMPNUM of ad  values
+			break;
+		}
 		default:{
 			break;
 		}
@@ -231,6 +237,9 @@ OS_STK  Task3Stk[TASK3_STK_SIZE];
 void TaskStart(void *pdata)
 {
 	int i = 0;
+#if OS_CRITICAL_METHOD == 3u                     /* Allocate storage for CPU status register           */
+    OS_CPU_SR  cpu_sr = 0u;
+#endif
 	(void)pdata;
 	OSStatInit(); //开启统计任务 
 	coin_init ();
@@ -386,7 +395,13 @@ void TaskStart(void *pdata)
 				break;
 			}
 			case 103:{// 进行特征值波形采样，上传电脑
-				adstd_sample ();
+				if (sys_env.coin_leave == 1){
+					OS_ENTER_CRITICAL();
+					sys_env.coin_leave = 0;
+					OS_EXIT_CRITICAL();
+					send_sample_data (sys_env.Detect_AD_buf_p, sys_env.AD_data_len);
+					sys_env.AD_buf_sending = 0;
+				}
 				break;
 			}
 			default:{
@@ -395,12 +410,14 @@ void TaskStart(void *pdata)
 		}
 	}
 }
-
+extern int System_call(U32 call_id);
 int main (void)
 {
+//	int re;
 	//main_task (0);
  	port_Init();
 	uart_init();//115200bps
+//	re = System_call (9);
 	Init_OS_ticks ();
 	OSInit(); // 初始化uCOS
 	OSTaskCreate(TaskStart, (void *)0, &TaskStartStk[TASK_START_STK_SIZE-1], TaskStartPrio);

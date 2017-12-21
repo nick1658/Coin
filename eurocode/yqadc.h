@@ -142,14 +142,16 @@ extern  s_coin_compare_value coin_cmp_value[COIN_TYPE_NUM];
 
 
 /////////////////////////////////
+#define AD_BUF_GROUP_LEN 2
 #define DATA_BUF_LENGTH	2*1024
 #define ADJ_BUF_LENGTH 4096
 #define NG_BUF_LENGTH	4096
 #define GOOD_BUF_LENGTH	4096
-extern volatile AD_Value AD_Value_buf[DATA_BUF_LENGTH];
+extern AD_Value AD_Value_buf[DATA_BUF_LENGTH];
 
 //extern volatile AD_Value Adj_AD_Value_buf[ADJ_BUF_LENGTH];
-extern volatile AD_Value Detect_AD_Value_buf[DATA_BUF_LENGTH];
+extern AD_Value Detect_AD_Value_buf[AD_BUF_GROUP_LEN][DATA_BUF_LENGTH];
+extern AD_Value *Detect_AD_Value_buf_p;
 
 
 extern volatile AD_Value NG_value_buf[NG_BUF_LENGTH];//异币采样数据缓冲区
@@ -166,7 +168,7 @@ extern volatile U32 start_sample;
 
 extern int ad0_value_changed;
 
-extern void send_sample_data (volatile AD_Value ad_value_buf[], int counter);
+extern void send_sample_data (AD_Value ad_value_buf[], int counter);
 
 void setStdValue (void);
 

@@ -321,11 +321,16 @@ void ini_screen (void)
 
 	dgus_tf1word(ADDR_GSTB,GSKB);	//initial addr on zixuexijiemian ganshe tubiao
 
+
+	dgus_tf1word(ADDR_MODE, para_set_value.data.system_mode); 
 	for (i = 0; i < COIN_TYPE_NUM; i++){
-		*pre_value.country[COUNTRY_ID].coin[i].data.p_pre_count_set = para_set_value.data.precoin_set_num[i];
+		if (para_set_value.data.system_mode == 0){
+			*pre_value.country[COUNTRY_ID].coin[i].data.p_pre_count_set = para_set_value.data.precoin_set_num[i];
+		}else{
+			*pre_value.country[COUNTRY_ID].coin[i].data.p_pre_count_set = 9999;
+		}
 		dgus_tf1word(pre_value.country[COUNTRY_ID].coin[i].data.hmi_pre_count_set_addr, *pre_value.country[COUNTRY_ID].coin[i].data.p_pre_count_set);	//预置值 
 		dgus_tf1word(pre_value.country[COUNTRY_ID].coin[i].data.hmi_pre_count_cur_addr, 0);	//计数值 清零
-		dgus_tf1word(pre_value.country[COUNTRY_ID].coin[i].data.hmi_state_ico_addr, 0);   //图标  灰
 	}
 }
 
