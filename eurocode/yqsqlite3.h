@@ -144,6 +144,7 @@ typedef struct
 	U16 pre_count_stop_n;
 	U16 coin_full_rej_pos;
 	U16 adj_offset_position;
+	U16 system_mode;
 }s_coin_parameter_value;
 
 typedef union

@@ -173,6 +173,20 @@ void disp_data(int addr1,int addr2,int addr3)     //pre picture ,specify address
 
 /////////////////////////////////////////////////////////////
 
+struct disp_count_buf{
+	U32 m_1yuan;
+	U32 m_5jiao;
+	U32 m_1jiao;
+	U32 m_5fen;
+	U32 m_2fen;
+	U32 m_1fen;
+	U32 m_10yuan;
+	U32 m_5yuan;
+	U32 total_good;
+	U32 total_ng;
+	U32 total_money;
+};
+
 void disp_allcount(void)     //pre counting ,detail list 
 {
 	if( coinchoose == CN0){
@@ -198,6 +212,19 @@ void disp_allcount(void)     //pre counting ,detail list
 		cy_print("%d,%d.%d%d;",20, (processed_coin_info.total_money/100),((processed_coin_info.total_money%100)/10),((processed_coin_info.total_money%100)%10));
 		cy_print("%d,%d;",21, processed_coin_info.total_ng);
 	}
+}
+
+void disp_allcount_to_pc (void)
+{
+	cy_print("%d,%d;", 13, coin_num[0]);
+	cy_print("%d,%d;", 14, coin_num[1]+coin_num[2]);
+	cy_print("%d,%d;", 15, coin_num[3]+coin_num[4]+coin_num[5]);
+	cy_print("%d,%d;", 16, coin_num[6]);
+	cy_print("%d,%d;",17, coin_num[7]);
+	cy_print("%d,%d;",18, coin_num[8]);
+	cy_print("%d,%d;",19, processed_coin_info.total_coin);
+	cy_print("%d,%d.%d%d;",20, (processed_coin_info.total_money/100),((processed_coin_info.total_money%100)/10),((processed_coin_info.total_money%100)%10));
+	cy_print("%d,%d;",21, processed_coin_info.total_ng);
 }
 
 ///////////////////////////////////////////////////////////////
@@ -698,7 +725,7 @@ void touchresult(void)      //根据接收到的  数 来决定 执行的任务
 		Writekick_value();
 		sys_env.workstep = 0;	//停止	所有动作  // 等待 触摸
 		break;
-	case ADDR_KICK_DELAY_T2:  //地址ADDR_KICK_DELAY_T1 0X56 踢币延时
+	case ADDR_KICK_DELAY_T2:  
 		para_set_value.data.kick_start_delay_t2 = (int)(touchnum[7]*256 )+(int)touchnum[8];       //delay time 
 		dgus_tf1word(ADDR_KICK_DELAY_T2, para_set_value.data.kick_start_delay_t2);	//make sure the return one
 		Writekick_value();
@@ -710,7 +737,7 @@ void touchresult(void)      //根据接收到的  数 来决定 执行的任务
 		Writekick_value();
 		sys_env.workstep = 0;	//停止	所有动作  // 等待 触摸
 		break;
-	case ADDR_MOTOR_IDLE_T:  //地址ADDR_KBDT1 0X57 踢币time
+	case ADDR_MOTOR_IDLE_T:  //
 		para_set_value.data.motor_idle_t = (int)(touchnum[7]*256 )+(int)touchnum[8];       //kick time 
 		dgus_tf1word(ADDR_MOTOR_IDLE_T, para_set_value.data.motor_idle_t);	//make sure  the return one
 		Writekick_value();
@@ -753,8 +780,8 @@ void touchresult(void)      //根据接收到的  数 来决定 执行的任务
 				}
 				write_para (); //写入预置值    
 				
-				dgus_tf1word(pre_value.country[COUNTRY_ID].coin[i].data.hmi_pre_count_cur_addr, *pre_value.country[COUNTRY_ID].coin[i].data.p_pre_count_current);	//计数值 清零
-				dgus_tf1word(pre_value.country[COUNTRY_ID].coin[i].data.hmi_state_ico_addr,0);   //图标  灰
+				dgus_tf1word(pre_value.country[COUNTRY_ID].coin[i].data.hmi_pre_count_set_addr, *pre_value.country[COUNTRY_ID].coin[i].data.p_pre_count_set);	
+				//dgus_tf1word(pre_value.country[COUNTRY_ID].coin[i].data.hmi_state_ico_addr,0);   //图标  灰
 				sys_env.workstep = 0;	//停止所有动作等待触摸
 				break;
 			}
@@ -784,8 +811,6 @@ void touchresult(void)      //根据接收到的  数 来决定 执行的任务
 			dgus_tf1word(ADDR_KICK2_M,0);
 			dgus_tf1word(ADDR_STORAGE_MOTOR,0);
 			dgus_tf1word(ADDR_DEBUG,0);
-			dgus_tf1word(ADDR_ZXYM,0);
-			dgus_tf1word(ADDR_ZXYM,0);
 			dgus_tf1word(ADDR_ZXLD,0);
 
 			STORAGE_MOTOR_STOPRUN();   //斗送入电机
@@ -804,7 +829,10 @@ void touchresult(void)      //根据接收到的  数 来决定 执行的任务
 			comscreen(Disp_Indexpic[prepic_num],Number_IndexpicB);	 // back to the  picture before alert
 		}else if( (value == 0x05)){	// bujian zhixing 					
 			detect_read();    //传回传感器状态
-		}		
+		}else if (value == 0x06){//波形采样
+			comscreen(Disp_Indexpic[JZTS],Number_IndexpicB);	 
+			sys_env.workstep =103;
+		}			
 		break;
 	case ADDR_KICK1_M:  //地址ADDR_KICK1_M bujian zhixing 
 		if( (value == 0x00)){	//0灰 1绿   						
@@ -860,7 +888,28 @@ void touchresult(void)      //根据接收到的  数 来决定 执行的任务
 			sys_env.hmi_debug_flag = 0;		
 		}	
 		break;
-
+	case ADDR_MODE:
+		para_set_value.data.system_mode = value;
+		for (i = 0; i < COIN_TYPE_NUM; i++){
+			for (j = 0; j < COIN_TYPE_NUM; j++){
+				if (pre_value.country[COUNTRY_ID].coin[i].data.coin_type == pre_value.country[COUNTRY_ID].coin[j].data.coin_type){
+					if (value == 0x00){
+						addr = para_set_value.data.precoin_set_num[i];
+					}else{
+						addr = 9999;
+					}
+					*pre_value.country[COUNTRY_ID].coin[j].data.p_pre_count_set = addr;//para_set_value.data.precoin_set_num[PRECOIN10];
+					*pre_value.country[COUNTRY_ID].coin[j].data.p_pre_count_current = 0;//当前计数值 清零
+					coin_num[j] = 0;
+					*pre_value.country[COUNTRY_ID].coin[j].data.p_pre_count_full_flag = 0;
+				}
+			}  
+			dgus_tf1word(pre_value.country[COUNTRY_ID].coin[i].data.hmi_pre_count_set_addr, *pre_value.country[COUNTRY_ID].coin[i].data.p_pre_count_set);	
+			//dgus_tf1word(pre_value.country[COUNTRY_ID].coin[i].data.hmi_state_ico_addr,0);   //图标  灰
+		}
+		sys_env.workstep = 0;	//停止所有动作等待触摸
+		write_para (); //写入预置值  
+		break;
 	/////////////////////////////////////////////
 	//如果是1 共公参数置0 自学习值 重新赋值  鉴别范围 重新赋值
 	case ADDR_CNCH1:  //地址ADDR_ZXCY21 bujian zhixing 
