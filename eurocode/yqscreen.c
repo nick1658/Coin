@@ -202,15 +202,15 @@ void disp_allcount(void)     //pre counting ,detail list
 		dgus_tf2word(ADDR_XDFG,processed_coin_info.total_ng);			//	  list forge
 		dgus_tf2word(ADDR_CPZE, processed_coin_info.total_money);	//pre worker money 
 		
-		cy_print("%d,%d;", 13, coin_num[0]);
-		cy_print("%d,%d;", 14, coin_num[1]+coin_num[2]);
-		cy_print("%d,%d;", 15, coin_num[3]+coin_num[4]+coin_num[5]);
-		cy_print("%d,%d;", 16, coin_num[6]);
-		cy_print("%d,%d;",17, coin_num[7]);
-		cy_print("%d,%d;",18, coin_num[8]);
-		cy_print("%d,%d;",19, processed_coin_info.total_coin);
-		cy_print("%d,%d.%d%d;",20, (processed_coin_info.total_money/100),((processed_coin_info.total_money%100)/10),((processed_coin_info.total_money%100)%10));
-		cy_print("%d,%d;",21, processed_coin_info.total_ng);
+//		cy_print("%d,%d;", 13, coin_num[0]);
+//		cy_print("%d,%d;", 14, coin_num[1]+coin_num[2]);
+//		cy_print("%d,%d;", 15, coin_num[3]+coin_num[4]+coin_num[5]);
+//		cy_print("%d,%d;", 16, coin_num[6]);
+//		cy_print("%d,%d;",17, coin_num[7]);
+//		cy_print("%d,%d;",18, coin_num[8]);
+//		cy_print("%d,%d;",19, processed_coin_info.total_coin);
+//		cy_print("%d,%d.%d%d;",20, (processed_coin_info.total_money/100),((processed_coin_info.total_money%100)/10),((processed_coin_info.total_money%100)%10));
+//		cy_print("%d,%d;",21, processed_coin_info.total_ng);
 	}
 }
 

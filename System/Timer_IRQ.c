@@ -84,6 +84,7 @@ void Timer4_Init(unsigned short us, void (*Callback)(void))
 #define KICK_Q_SCAN(N) if (coin_env.kick_Q[N] > 0) {\
 	coin_env.kick_Q[N]--; \
 	if (coin_env.kick_Q[N] == 0){ \
+		processed_coin_info.total_ng++; \
 		EMKICK1(STARTRUN);	  \
 		coin_env.kick_keep_t1 = para_set_value.data.kick_keep_t1;\
 	}\
@@ -100,8 +101,8 @@ void Timer3_IRQ(void)
 {   
 	KICK_Q_SCAN(0);
 	KICK_Q_SCAN(1);
-//	KICK_Q_SCAN(2);
-//	KICK_Q_SCAN(3);
+	KICK_Q_SCAN(2);
+	KICK_Q_SCAN(3);
 //	KICK_Q_SCAN(4);
 //	KICK_Q_SCAN(5);
 //	KICK_Q_SCAN(6);
@@ -110,8 +111,8 @@ void Timer3_IRQ(void)
 //	KICK_Q_SCAN(9);
 	FULL_KICK_Q_SCAN(0);
 	FULL_KICK_Q_SCAN(1);
-//	FULL_KICK_Q_SCAN(2);
-//	FULL_KICK_Q_SCAN(3);
+	FULL_KICK_Q_SCAN(2);
+	FULL_KICK_Q_SCAN(3);
 //	FULL_KICK_Q_SCAN(4);
 //	FULL_KICK_Q_SCAN(5);
 //	FULL_KICK_Q_SCAN(6);

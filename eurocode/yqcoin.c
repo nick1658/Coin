@@ -52,6 +52,8 @@ void prepare_coin_cmp_value (void)
 	coin_value1 = Detect_AD_Value_buf[coin_env.AD_min_index[coin_env.cmp_use_index]].AD1;
 	coin_value2 = Detect_AD_Value_buf[coin_env.AD_min_index[coin_env.cmp_use_index]].AD2;
 #endif
+	
+	memset ((void*)Detect_AD_Value_buf, 0, sizeof (Detect_AD_Value_buf));
 }
 
 S16 is_good_coin (void)
@@ -95,7 +97,7 @@ void cy_precoincount(void)
 	{
 		case 0:
 		{			
-			if ( (ch0_counttemp != ch0_count) && (ch1_counttemp != ch1_count) && (ch2_counttemp != ch2_count))	//mean there is a coin come
+			if ( (ch0_counttemp != ch0_count))	//mean there is a coin come
 			{
 				ch0_counttemp = ch0_count;
 				ch1_counttemp = ch1_count;
@@ -119,11 +121,10 @@ void cy_precoincount(void)
 			if ((good_coin < 0) ||  ((para_set_value.data.coin_full_rej_pos == 1) && 
 									 ((*(pre_value.country[COUNTRY_ID].coin[good_coin].data.p_pre_count_set) == 0) ||
 									  (*pre_value.country[COUNTRY_ID].coin[good_coin].data.p_pre_count_full_flag == 1)))){ //假币 返回值小于0
-				if (coin_env.full_kick_Q[coin_env.full_kick_Q_index] == 0){
+				if (coin_env.kick_Q[coin_env.kick_Q_index] == 0){
 					coin_env.kick_Q[coin_env.kick_Q_index] = para_set_value.data.kick_start_delay_t1;
 					coin_env.kick_Q_index++;
 					coin_env.kick_Q_index %= KICK_Q_LEN;
-					processed_coin_info.total_ng++;
 					coin_env.coin_Q[coin_env.coin_Q_remain] = COIN_NG_FLAG;//
 				}else{//剔除工位1队列追尾错误
 					SEND_ERROR(KICK1COINERROR);

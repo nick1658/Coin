@@ -6,7 +6,7 @@
 #include "def.h"
 #include "yqsqlite3.h"
 
-#define KICK_Q_LEN 2
+#define KICK_Q_LEN 4
 #define COIN_Q_LEN 16
 #define SAMPLE_METHOD_1
 
@@ -72,11 +72,11 @@ typedef struct
 #define ADSAMPNUM0  16    //every ad channel sample number for getting average value 2  8 
 
 #define  WAVEUP0  32   //1  //8确认波形下降 次数  4
-#define  WAVEMAX0  16 //1  //8 15   //确认波形峰值  次数 50 40   65     20
+#define  WAVEMAX0  32 //1  //8 15   //确认波形峰值  次数 50 40   65     20
 #define  WAVE0fall 16 //2 //15  //波形落回到参考值以下的计数20 
-#define  WAVEUPT0  16  //3 //4//8   // 确认双波峰  方法一 确认波形上升  次数   10 4      求导法  3
+#define  WAVEUPT0  32  //3 //4//8   // 确认双波峰  方法一 确认波形上升  次数   10 4      求导法  3
 
-#define WAVE_DOWN_VALUE 30
+#define WAVE_DOWN_VALUE 100
 #define WAVE_UP_VALUE 30
 #define WAVE_COIN_TWO_DOWN_VALUE 30
 

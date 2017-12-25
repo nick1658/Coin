@@ -917,7 +917,7 @@ U16 adstd_sample(void)    //基准值调试
 	std_ad1 = (ad1_std[2] +ad1_std[3] +ad1_std[4]+ad1_std[5]+ad1_std[6]+ad1_std[7]+ad1_std[8]+ad1_std[9])/8;
 	std_ad2 = (ad2_std[2] +ad2_std[3] +ad2_std[4]+ad2_std[5]+ad1_std[6]+ad2_std[7]+ad2_std[8]+ad2_std[9])/8;
 	//if(adtime ==0)
-	if ((std_ad0 < 850) && (start_sample == 0))
+	if ((std_ad0 < 800) && (start_sample == 0))
 	{
 		//cy_print ("here %d sample_data_buf_index %d\n", start_sample, sample_data_buf_index);
 		start_sample = 1;
